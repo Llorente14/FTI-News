@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #fff;
+}
+
+/* Splash Screen Container */
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f4e8;
+    z-index: 50;
+    opacity: 1;
+}
+
+.splash-screen.hiding {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    /* Animation name duration timing-function delay fill-mode */
+    animation: scaleUpSpring 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes scaleUpSpring {
+    from {
+        transform: scale(0.3);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Styling for the text FTI News */
+.logo-text {
+    font-size: 6rem; 
+    font-weight: 700; 
+    opacity: 0; 
+    animation: fadeInY 0.8s ease-out forwards;
+}
+
+.daily {
+    color: #ff7f50;
+    animation-delay: 0.5s;
+}
+
+.pulse {
+    color: #073577;
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeInY {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loader bar at the bottom */
+.loader-container {
+    position: absolute;
+    bottom: 4rem; 
+    opacity: 0; 
+    animation: fadeIn 0.5s ease-out 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.loader-track {
+    width: 3rem;  
+    height: 0.25rem; 
+    background-color: #e5e7eb; 
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.loader-fill {
+    width: 0; 
+    height: 100%;
+    background-color: #ff7f50;
+    border-radius: 9999px;
+    animation: fillWidth 0.9s ease-in-out 1.6s forwards;
+}
+
+@keyframes fillWidth {
+    to {
+        width: 100%;
+    }
+}
