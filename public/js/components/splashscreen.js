@@ -6,8 +6,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
     splashScreen.classList.add("hiding");
   }, 2500);
 
-  //Sesudah itu dalam 3 detik, halaman otomatis pindah ke index.html
+  //Sesudah itu dalam 2 detik, halaman otomatis pindah ke index.html
   setTimeout(() => {
-    window.location.href = "index.html"; // <-- INI PERUBAHANNYA
-  }, 3000);
+    window.location.href = "../index.html"; // <-- INI PERUBAHANNYA
+  }, 2000);
 });
