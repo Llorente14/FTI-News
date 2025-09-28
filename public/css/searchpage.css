@@ -1,0 +1,133 @@
+@import url(variables/colorsFont.css);
+
+/* Pengaturan Dasar & Font */
+body {
+    font-family: "monospace";
+    background-color: var(--color-base-200);
+    color: var(--color-base-content);
+    margin: 0;
+}
+
+/* Kontainer Utama */
+.search-page-container {
+    max-width: 800px;
+    margin: 40px auto; /* Menambah margin atas/bawah dan menengahkan konten */
+}
+
+/* Bagian 1: Bar Pencarian */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    background-color: var(--color-base-100);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Menambahkan efek shadow yang lembut */
+}
+
+/* Gaya untuk field input di dalam search bar */
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    color: var(--color-base-content);
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Gaya umum untuk tombol di dalam search bar */
+.search-bar button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+/* Gaya untuk tombol hapus */
+.search-bar .clear-btn {
+    font-size: 1.5rem;
+    color: var(--color-neutral);
+}
+
+/* Gaya untuk tombol cari */
+.search-bar .search-btn {
+    background-color: var(--color-base-content);
+    color: var(--color-base-100);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-left: 8px;
+}
+
+/* Gaya untuk ikon di dalam tombol cari */
+.search-bar .search-btn .fa-search {
+    font-size: 1rem;
+}
+
+/* Bagian 2: Kartu Berita */
+.news-card {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    margin-bottom: 32px;
+    background-color: var(--color-base-300);
+    border-radius: 8px;
+    border: 1px solid var(--color-base-300);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+}
+
+/* Efek yang terjadi saat kursor mouse di atas kartu berita */
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    border-color: var(--color-secondary-content);
+}
+
+.card-image img {
+    width: 150px;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h2 {
+    font-size: 1.5rem;
+    margin: 4px 0 8px 0;
+    font-weight: 600;
+    color: var(--color-base-content);
+}
+
+.card-content p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.card-content .source {
+    font-size: 0.9rem;
+    color: var(--color-neutral);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-content .snippet {
+    font-size: 1rem;
+    color: var(--color-base-content);
+    margin-bottom: 12px;
+}
+
+.card-content .timestamp {
+    font-size: 0.9rem;
+    color: var(--color-neutral);
+}
