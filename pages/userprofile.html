@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/components/userprofile.css">
+</head>
+
+<body>
+
+    <div class="page-container">
+        <aside class="sidebar glass-container">
+            <div class="sidebar-header">
+                NEWS-WEB
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="home.html">Beranda</a></li>
+                    <li><a href="profile.html" class="active">Profil Saya</a></li>
+                    <li><a href="bookmarks.html">Artikel Tersimpan</a></li>
+
+                    <li style="padding: 12px; color: #6B7280; font-size: 0.9em; font-weight: 600;">KATEGORI</li>
+                    <li><a href="kategori_politik.html">Politik</a></li>
+                    <li><a href="kategori_olahraga.html">Olahraga</a></li>
+                    <li><a href="kategori_teknologi.html">Teknologi</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <ul>
+                    <li><a href="about_us.html">Tentang Kami</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                    <li><a href="#" id="logoutButton">Logout</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Settings</h1>
+            </header>
+
+            <div class="content-tabs">
+                <button class="tab-button active" onclick="showSection('myProfile')">My Profile</button>
+                <button class="tab-button" onclick="showSection('commentHistory')">Comment History</button>
+                <button class="tab-button" onclick="window.location.href='bookmarks.html'">My Bookmarks</button>
+            </div>
+
+            <div id="myProfile" class="content-section active">
+                <div class="card glass-container">
+                    <div class="card-header">
+                        <h2>Profile Information</h2>
+                        <button class="edit-btn" id="editProfileBtn">Edit</button>
+                    </div>
+                    <div class="profile-info-header">
+                        <img src="https://via.placeholder.com/150" alt="User Avatar" class="avatar" id="profileAvatar">
+                        <div>
+                            <h3 id="profileName">Cutie Pie</h3>
+                            <p id="profileEmail">cutiepie@example.com</p>
+                        </div>
+                    </div>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <label>Nama Lengkap</label>
+                            <p id="detailName">Cutie Pie</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Nomor Telepon</label>
+                            <p id="detailPhone">+1 234-5675-8765</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Alamat Email</label>
+                            <p id="detailEmail">cutiepie@example.com</p>
+                        </div>
+                        <div class="detail-item">
+                            <label>Bio</label>
+                            <p id="detailBio">Customer Service Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="commentHistory" class="content-section">
+                <div class="card glass-container">
+                    <h2>Riwayat Komentar Anda</h2>
+                    <br>
+                    <div class="comment-item">
+                        <p class="comment-text">"Ini adalah contoh komentar pada sebuah artikel berita. Sangat
+                            informatif!"</p>
+                        <span class="comment-meta">Pada artikel: <a href="#">Judul Artikel Berita Pertama</a> - 2 hari
+                            lalu</span>
+                    </div>
+                    <div class="comment-item">
+                        <p class="comment-text">"Saya setuju dengan pendapat penulis. Analisis yang tajam."</p>
+                        <span class="comment-meta">Pada artikel: <a href="#">Judul Artikel Berita Lainnya</a> - 5 hari
+                            lalu</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="editProfileModal" class="modal-overlay">
+        <div class="modal-content glass-container">
+            <button class="close-btn" id="closeModalBtn">&times;</button>
+            <h2>Ubah Informasi Akun</h2>
+            <form id="updateProfileForm" onsubmit="handleProfileUpdate(event)">
+                <div id="editProfileMsg" class="message"></div>
+                <div class="form-group">
+                    <label for="newName">Nama Lengkap</label>
+                    <input type="text" id="newName" placeholder="Min 3 karakter, maks 32, tanpa angka">
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Kata Sandi Baru (opsional)</label>
+                    <input type="password" id="newPassword" placeholder="Minimal 8 karakter">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Konfirmasi Kata Sandi Baru</label>
+                    <input type="password" id="confirmPassword" placeholder="Ulangi kata sandi baru">
+                </div>
+                <button type="submit" class="submit-btn">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../public/js/components/userprofile.js"></script>
+</body>
+
+</html>
