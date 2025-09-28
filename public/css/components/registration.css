@@ -16,9 +16,9 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     color: var(--text-color);
-    background-image: linear-gradient(to top right, #efd2b7, #f5e1cf, #fff4ea);
+    background-color: var(--background-color);
     background-attachment: fixed;
     display: flex;
     justify-content: center;

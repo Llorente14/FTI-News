@@ -1,8 +1,8 @@
 :root {
     --primary-color: #ACB9AE;
     --accent-color: #F2D2B5;
-    --background-color: #EFEAE6;
-    --card-background: #FFFFFF;
+    --background-color: #efeae6;
+    --card-background: #eceaea;
     --text-color: #333333;
     --secondary-text: #757575;
     --border-color: #E0E0E0;
@@ -15,9 +15,9 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     color: var(--text-color);
-    background-image: linear-gradient(to top right, #efd2b7, #f5e1cf, #fff4ea);
+    background-color: var(--background-color);
     background-attachment: fixed;
     display: flex;
 }
@@ -50,7 +50,7 @@ body {
 
 .sidebar-header {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: bold;
     color: var(--white-text);
     margin-bottom: 32px;
     padding: 0 12px;
@@ -71,7 +71,7 @@ body {
     border-radius: 8px;
     text-decoration: none;
     color: var(--secondary-text-light);
-    font-weight: 500;
+    font-weight: 900;
     margin-bottom: 8px;
     transition: background-color 0.2s, color 0.2s;
 }
@@ -164,6 +164,10 @@ body {
     transition: background-color 0.2s;
 }
 
+.edit-btn i {
+    font-size: 17px;
+}
+
 .edit-btn:hover {
     background-color: var(--primary-color);
 }
@@ -242,8 +246,8 @@ body {
     background: linear-gradient(135deg,
             rgba(255, 255, 255, 0.1),
             rgba(255, 255, 255, 0));
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(20px);
     border: 2px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
