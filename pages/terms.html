@@ -5,9 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FTI-News</title>
     <link rel="stylesheet" href="../public/css/termspage.css">
+    <link rel="stylesheet" href="../public/css/components/header.css">
     <link rel="stylesheet" href="../public/css/variables/colorsFont.css">
+    <link rel="stylesheet" href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"/>
 </head>
 <body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">FTI News</a>
+            <button class="navbar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            </button>
+            <ul class="navbar-menu">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
+            <li class="dropdown">
+                <button class="dropdown-button" id="dropdownBtn">
+                Kategori
+                <i class="bx bx-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownContent">
+                <ul class="dropdown-menu">
+                    <li><a href="#">Politik</a></li>
+                    <li><a href="#">Teknologi</a></li>
+                    <li><a href="#">Sport</a></li>
+                </ul>
+                </div>
+            </li>
+
+            <li><a href="/pages/login.html">Login</a></li>
+            <div class="search-container">
+                <form class="search-form">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    name="search"
+                    class="search-input"
+                />
+                <button type="submit" class="search-button">
+                    <i class="bx bx-search"></i>
+                </button>
+                </form>
+            </div>
+
+            <a href="/pages/profile.html">
+                <i class="bx bx-user-circle"></i>
+            </a>
+            </ul>
+        </div>
+    </nav>
+
     <div class="terms-container">
         <h1>FTI News Terms of Use</h1>
         <div class="meta-info">
@@ -43,6 +93,6 @@
             </p>
         </div>
     </div>
-
+    <script src="../public/js/components/header.js"></script>
 </body>
 </html>

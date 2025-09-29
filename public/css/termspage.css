@@ -1,16 +1,18 @@
 @import url(variables/colorsFont.css);
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    scroll-behavior: smooth;
+    font-family: monospace;
 }
 
 body {
-    font-family: "monospace";
+    position: relative;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-base-200);
-    color: var(--color-base-content);
-    line-height: 2;
+    overflow-x: hidden;
 }
 
 .terms-container {
