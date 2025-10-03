@@ -9,7 +9,7 @@
 /* Main Container */
 .container {
     display: flex;
-    gap: 20px; /* Jarak antar kolom */
+    gap: 20px;
     max-width: 1200px;
     margin: auto;
     margin-bottom: 50px;
@@ -27,7 +27,7 @@
     padding: 15px;
     border-radius: 5px;
     text-align: center;
-    display: none; /* Awalnya disembunyikan */
+    display: none;
 }
 
 .featured-news img {
@@ -68,11 +68,11 @@
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    
 }
 
 .news-item:hover {
-    background-color: #f5f5f5;
+    background-color: var(--color-base-300);
 }
 
 .news-item img {
@@ -89,13 +89,12 @@
 }
 
 /* STATE KEDUA: Ketika salah satu berita di list dipilih */
-/* Kelas ini akan ditambahkan oleh JavaScript untuk menampilkan layout 2 kolom */
 .container.show-featured .featured-news {
     display: block; /* Tampilkan kembali kolom berita utama */
 }
 
 .container.show-featured .news-list {
-    width: auto; /* Kembalikan lebar agar tidak 100% lagi */
+    width: auto;
 }
 
 h1 {

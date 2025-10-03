@@ -1,7 +1,7 @@
 // Tunggu sampai seluruh konten halaman siap
 document.addEventListener('DOMContentLoaded', () => {
     // Ganti dengan URL API berita Anda yang sebenarnya
-    const apiUrl = 'https://newsapi.org/v2/top-headlines?country=id&apiKey=YOUR_API_KEY'; // <-- Ganti dengan URL API Anda
+    const apiUrl = 'https://berita-indo-api.vercel.app/v1/cnn-news'; // <-- Ganti dengan URL API Anda
 
     // Panggil fungsi untuk mengambil dan menampilkan berita
     ambilBerita(apiUrl);
