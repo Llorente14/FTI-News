@@ -288,6 +288,9 @@ img {
 
 .populer-news .wrapper .card-content {
   padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
 }
 
 .populer-news .wrapper .card-date,
@@ -305,6 +308,17 @@ img {
 }
 
 .populer-news .wrapper .card-title a:hover {
+  text-decoration: underline;
+}
+
+.populer-news .wrapper .card-publisher {
+  text-decoration: none;
+  color: var(--color-neutral);
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  font-weight: 700;
+}
+.populer-news .wrapper .card-publisher:hover {
   text-decoration: underline;
 }
 
