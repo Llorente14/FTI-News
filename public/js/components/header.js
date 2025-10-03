@@ -58,11 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /* Set Link Kategori */
-    document.querySelectorAll(".dropdown-menu a").forEach((a) => {
-        const label = a.textContent.trim().toLowerCase();
-        a.href = `/kategori/kategori.html?cat=${encodeURIComponent(label)}`;
-        a.classList.add("kategori");
-        a.setAttribute("data-cat", label);
-    });
+
 });
