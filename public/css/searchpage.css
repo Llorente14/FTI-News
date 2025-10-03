@@ -1,7 +1,7 @@
 @import url(variables/colorsFont.css);
 
 /* Pengaturan Dasar & Font */
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -82,19 +82,11 @@ body {
     display: flex;
     align-items: stretch;
     gap: 20px;
-    margin-bottom: 32px;
     background-color: var(--color-base-300);
     border-radius: 8px;
     border: 1px solid var(--color-base-300);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     overflow: hidden;
-}
-
-/* Efek yang terjadi saat kursor mouse di atas kartu berita */
-.news-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-    border-color: var(--color-secondary-content);
 }
 
 .card-image img {
@@ -139,4 +131,26 @@ body {
 .card-content .timestamp {
     font-size: 0.9rem;
     color: var(--color-neutral);
+}
+
+/* --- TAMBAHAN UNTUK KARTU BERITA YANG BISA DIKLIK --- */
+
+/* Ini menargetkan tag <a> yang membungkus kartu */
+a.news-card-link {
+    display: block; /* Membuat link berperilaku sebagai blok */
+    text-decoration: none; /* Menghilangkan garis bawah dari link */
+    color: inherit; /* Membuat warna teks mengikuti induknya */
+    margin-bottom: 32px; /* Memberi jarak antar kartu */
+}
+
+/* Efek hover untuk kartu yang dibungkus link */
+a.news-card-link:hover .news-card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    border-color: var(--color-secondary-content);
+}
+
+/* Beri garis bawah pada judul saat seluruh kartu di-hover */
+a.news-card-link:hover h2 {
+    text-decoration: underline;
 }

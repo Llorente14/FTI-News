@@ -61,44 +61,27 @@
 
     <!-- Main Content -->
     <main class="search-page-container">
-        <section class="search-bar">
-            <input type="text" value="TRUMP">
-            <button class="clear-btn" title="Clear">×</button>
-            <button class="search-btn" title="Search">
+        
+        <form class="search-bar">
+            <input type="text" placeholder="Cari berita lain...">
+            <button type="button" class="clear-btn" title="Clear">×</button>
+            <button type="submit" class="search-btn" title="Search">
                 <i class="fas fa-search"></i>
             </button>
-        </section>
+        </form>
+
+        <h1 class="search-title"></h1>
 
         <section class="search-results">
-            
-            <article class="news-card">
-                <div class="card-image">
-                    <img src="https://www.aljazeera.com/wp-content/uploads/2025/09/2025-09-19T220351Z_1096491290_RC29VGA6TT26_RTRMADP_3_USA-TRUMP-1758422831.jpg?resize=770%2C513&quality=80" alt="Trump signing a document">
-                </div>
-                <div class="card-content">
-                    <p class="source">Newshour</p>
-                    <h2>Trump introduces $100,000 visa</h2>
-                    <p class="snippet">Visa applies to skilled foreign workers</p>
-                    <p class="timestamp">2 days ago</p>
-                </div>
-            </article>
+            </section>
 
-            <article class="news-card">
-                <div class="card-image">
-                    <img src="https://i.abcnewsfe.com/a/c5174baa-d194-4c92-a2f6-f67d9b11d170/donald-trump-66-rt-gmh-250917_1758140279684_hpMain.jpg" alt="Windsor Castle">
-                </div>
-                <div class="card-content">
-                    <p class="source">Six O'Clock News</p>
-                    <h2>President Trump visits Windsor Castle</h2>
-                    <p class="snippet">This is the first day of Donald Trump's second state visit to the UK</p>
-                    <p class="timestamp">5 days ago</p>
-                </div>
-            </article>
-
-        </section>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../public/js/components/header.js"></script>
+    <script src="../public/js/search.js"></script>
+    <script src="../public/js/app.js"></script>
+    <script src="../public/js/data/biografiPenerbit.js"></script>
 
 </body>
 </html>
