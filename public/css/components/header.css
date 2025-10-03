@@ -22,6 +22,22 @@
   --color-error-content: oklch(27% 0.105 12.094);
 }
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    position: relative;
+    width: 100dvw;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-base-200);
+    overflow-x: hidden;
+}
+
 .navbar {
   display: flex;
   flex-direction: column;

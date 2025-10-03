@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - FTI News</title>
+    <!-- Boxicons for Icons -->
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Component & Page CSS -->
+    <link rel="stylesheet" href="../public/css/components/header.css" />
+    <link rel="stylesheet" href="../public/css/contact.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+        <nav class="navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">FTI News</a>
+        <button class="navbar-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <ul class="navbar-menu">
+          <li><a href="#">Beranda</a></li>
+          <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
+          <li class="dropdown">
+            <button class="dropdown-button" id="dropdownBtn">
+              Kategori
+              <i class="bx bx-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="dropdownContent">
+              <ul class="dropdown-menu">
+                <li><a href="#">Politik</a></li>
+                <li><a href="#">Teknologi</a></li>
+                <li><a href="#">Sport</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li><a href="/pages/login.html">Login</a></li>
+          <div class="search-container">
+            <form class="search-form">
+              <input
+                type="text"
+                placeholder="Search..."
+                name="search"
+                class="search-input"
+              />
+              <button type="submit" class="search-button">
+                <i class="bx bx-search"></i>
+              </button>
+            </form>
+          </div>
+
+          <a href="/pages/profile.html">
+            <i class="bx bx-user-circle"></i>
+          </a>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="contact-container">
+        <h1>Contact</h1>
+        
+        <div class="contact-section">
+            <h2>Kontak Redaksi</h2>
+            <p><strong>FTI NEWS</strong></p>
+            <p><strong>Alamat:</strong> Jalan Letjen S. Parman Nomor 1, Grogol Petamburan 11440, Jakarta Barat, DKI Jakarta, Indonesia</p>
+            <p><strong>Email:</strong> redaksi.FTINEWS@untar.ac.id</p>
+            <p><strong>Telepon:</strong> 0812-3456-7890</p>
+        </div>
+
+        <div class="contact-section">
+            <h2>Layanan Pengaduan Konsumen</h2>
+            <p><strong>DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</strong></p>
+            <p><strong>Alamat:</strong> Gedung I Lantai 3, Jalan M.I. Ridwan Rais No. 5, Jakarta Pusat 10110</p>
+            <p><strong>Nomor Kontak WhatsApp:</strong> 0809-8765-4321</p>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../public/js/components/header.js"></script>
+  </body>
+</html>

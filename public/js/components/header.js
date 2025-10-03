@@ -8,8 +8,8 @@ navbarToggle.addEventListener("click", () => {
 });
 
 //DOM untuk Dropdown
-const dropdownContent = document.getElementById("dropdownContent");
-const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdownContent = document.getElementById("dropdown-content");
+const dropdownBtn = document.getElementById("dropdown-btn");
 let dropdownOpen = false;
 
 function toggleDropdown() {

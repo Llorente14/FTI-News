@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Detail Page</title>
+    <!-- Boxicons for Icons -->
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Component & Page CSS -->
+    <link rel="stylesheet" href="../public/css/components/header.css" />
+    <link rel="stylesheet" href="../public/css/detail.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="../index.html" class="navbar-logo">FTI News</a>
+        <ul class="navbar-menu" id="navbar-menu">
+          <li><a href="../index.html">Beranda</a></li>
+          <li><a href="#">Tentang Kami</a></li>
+          <li class="dropdown">
+            <button class="dropdown-button" id="dropdown-btn">
+              Kategori
+              <i class="bx bx-chevron-down"></i>
+            </button>
+            <div class="dropdown-content" id="dropdown-content">
+              <ul class="dropdown-menu">
+                <li><a href="detail.html?kategori=politik">Politik</a></li>
+                <li><a href="detail.html?kategori=teknologi">Teknologi</a></li>
+                <li><a href="detail.html?kategori=olahraga">Sport</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#">Login</a></li>
+        </ul>
+        <div class="navbar-right">
+          <div class="search-container">
+            <form class="search-form">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search..."
+              />
+              <button type="submit" class="search-button">
+                <i class="bx bx-search"></i>
+              </button>
+            </form>
+          </div>
+          <a href="#" class="user-icon"><i class="bx bx-user"></i></a>
+        </div>
+        <button class="navbar-toggle" id="navbar-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+      <main class="main-content">
+        <div id="loading" class="loading-spinner"></div>
+        <div id="error-message" class="error-message" style="display: none">
+          Gagal memuat berita. Silakan coba lagi nanti.
+        </div>
+        
+        <!-- Container for the single news article -->
+        <div id="news-content" style="display: none">
+          <!-- Article content will be injected here by jQuery -->
+        </div>
+
+        <!-- Related Topics Section -->
+        <div id="related-topics-container" class="related-topics-container" style="display: none;">
+            <h2>Topik Terkait</h2>
+            <div class="topics">
+                <!-- Dummy topics for now -->
+                <a href="#" class="topic-tag">Politik</a>
+                <a href="#" class="topic-tag">Nasional</a>
+                <a href="#" class="topic-tag">Pemerintahan</a>
+            </div>
+        </div>
+
+        <!-- Related News Section -->
+        <div id="related-news-container" class="related-news-container" style="display: none;">
+            <h2>Berita Terkait Lainnya</h2>
+            <div id="related-news-grid" class="related-news-grid">
+                <!-- Related news cards will be injected here by jQuery -->
+            </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../public/js/components/header.js"></script>
+    <script src="../public/js/detail.js"></script>
+  </body>
+</html>
+
