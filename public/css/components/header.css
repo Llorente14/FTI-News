@@ -1,5 +1,3 @@
-@import url(/variables/colorsFont.css);
-
 .navbar {
   display: flex;
   flex-direction: column;
