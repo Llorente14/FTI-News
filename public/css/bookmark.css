@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: monospace;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    gap: 20px; /* Jarak antar kolom */
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: var(--color-base-100);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Kolom Berita Utama (Kiri) - DISEMBUNYIKAN SECARA DEFAULT */
+.featured-news {
+    flex: 2;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    display: none; /* Awalnya disembunyikan */
+}
+
+.featured-news img {
+    width: 50%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.featured-news h2 {
+    font-size: 24px;
+    margin: 10px 0 20px;
+    color: #333;
+}
+
+.featured-news a {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--color-base-100);
+    border-radius: 8px;
+    background-color: #555;
+    padding: 10px 15px;
+}
+
+/* Kolom Daftar Berita (Kanan) */
+.news-list {
+    flex: 1; /* Otomatis memenuhi lebar jika featured-news disembunyikan */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.news-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.news-item:hover {
+    background-color: #f5f5f5;
+}
+
+.news-item img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.news-item p {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* STATE KEDUA: Ketika salah satu berita di list dipilih */
+/* Kelas ini akan ditambahkan oleh JavaScript untuk menampilkan layout 2 kolom */
+.container.show-featured .featured-news {
+    display: block; /* Tampilkan kembali kolom berita utama */
+}
+
+.container.show-featured .news-list {
+    width: auto; /* Kembalikan lebar agar tidak 100% lagi */
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
