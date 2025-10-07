@@ -4,7 +4,7 @@ Proyek "Website News" adalah tugas Ujian Tengah Semester (UTS) untuk mata kuliah
 👥 Anggota Tim (Kelompok 1)
 535240143 - Axel Chrisdy Sanjaya (Llorente14)
 
-535240176 - Tandwiyan Talenta
+535240176 - Tandwiyan Talenta (tndwyntlnt)
 
 535240187 - Naisya Yuen Ra'af (itsyuenai)
 
@@ -80,4 +80,5 @@ Klik kanan pada file index.html.
 Pilih opsi "Open with Live Server".
 
 Proyek akan otomatis terbuka di browser Anda dan siap digunakan.
+
 
