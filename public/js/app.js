@@ -1,17 +1,31 @@
+import { biografiPenerbit } from "./data/biografiPenerbit.js";
+
 $(document).ready(function () {
-  const apiUrl = "https://berita-indo-api.vercel.app/v1/cnn-news";
+  const allPenerbit = Object.keys(biografiPenerbit);
 
-  console.log("Mencoba mengambil data dari:", apiUrl);
+  if (allPenerbit.length === 0) {
+    console.error("Tidak ada penerbit yang tersedia di biografiPenerbit");
+    return;
+  }
 
-  // Fungsi untuk membuat format tanggal
+  console.log("Penerbit yang tersedia:", allPenerbit);
+
+  const penerbitUtama = allPenerbit[0];
+  const apiUrl = `https://berita-indo-api.vercel.app/v1/${penerbitUtama}`;
+
+  console.log(
+    "Mengambil berita utama dari:",
+    biografiPenerbit[penerbitUtama].nama
+  );
+
   function formatDate(isoDate) {
     const date = new Date(isoDate);
     const options = { day: "numeric", month: "long" };
     return date.toLocaleDateString("id-ID", options);
   }
 
-  // Fungsi untuk memotong teks snippet
   function truncateText(text, maxLength) {
+    if (!text || text.length === 0) return "";
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + "...";
     }
@@ -29,7 +43,6 @@ $(document).ready(function () {
         return;
       }
 
-      // 1. Render Berita Utama (Main News) - berita pertama
       const mainNews = newsData[0];
       $(".main-news .img-container .news-title").text(mainNews.title);
       $(".main-news .img-container img").attr({
@@ -38,7 +51,6 @@ $(document).ready(function () {
       });
       $(".main-news .img-container a").attr("href", mainNews.link);
 
-      // 2. Render Sub News (2 berita selanjutnya)
       $(".sub-news .news-card").each(function (index) {
         if (newsData[index + 1]) {
           const news = newsData[index + 1];
@@ -51,27 +63,7 @@ $(document).ready(function () {
         }
       });
 
-      // 3. Render Berita Populer (6 berita, mulai dari index 3)
-      $(".populer-news .card").each(function (index) {
-        const newsIndex = index + 3;
-        if (newsData[newsIndex]) {
-          const news = newsData[newsIndex];
-          $(this).find("img").attr({
-            src: news.image.small,
-            alt: news.title,
-          });
-          $(this).find(".card-date").text(formatDate(news.isoDate));
-          $(this)
-            .find(".card-title a")
-            .text(news.title)
-            .attr("href", news.link);
-          $(this)
-            .find(".card-description")
-            .text(truncateText(news.contentSnippet, 150));
-        }
-      });
-
-      console.log("Semua berita berhasil di-render");
+      console.log("Main news dan sub news berhasil di-render");
     })
     .fail(function (xhr, status, error) {
       console.error("Terjadi kesalahan saat fetch:", error);
@@ -79,56 +71,169 @@ $(document).ready(function () {
       console.error("Response:", xhr.responseText);
     });
 
-  // Fungsi untuk mengambil berita berdasarkan kategori
-  function fetchCategoryNews(category, containerSelector) {
-    const categoryUrl = `${apiUrl}/${category}`;
+  // 3. Render Berita Populer: 4 dari CNN News, sisanya dari penerbit lain
+  const $popularCards = $(".populer-news .card");
+  const totalPopularCards = $popularCards.length;
+  const cnnNewsKey = "cnn-news";
+  const otherPenerbit = allPenerbit.filter((key) => key !== cnnNewsKey);
 
-    $.get(categoryUrl)
-      .done(function (response) {
-        const categoryNews = response.data || [];
+  const cnnPromise = $.get(
+    `https://berita-indo-api.vercel.app/v1/${cnnNewsKey}`
+  )
+    .then(function (res) {
+      const cnnNews = res.data || [];
+      return cnnNews.slice(0, 4).map(function (news) {
+        return {
+          news: news,
+          penerbitKey: cnnNewsKey,
+          penerbitNama: biografiPenerbit[cnnNewsKey].nama,
+        };
+      });
+    })
+    .catch(function () {
+      return [];
+    });
 
-        if (categoryNews.length === 0) return;
+  const otherPromises = otherPenerbit.map(function (penerbitKey) {
+    const penerbitApiUrl = `https://berita-indo-api.vercel.app/v1/${penerbitKey}`;
+    const penerbitNama = biografiPenerbit[penerbitKey].nama;
 
-        const $container = $(containerSelector);
-
-        // Render berita featured (pertama dengan gambar)
-        const featured = categoryNews[0];
-        $container
-          .find(".update-card.featured .update-img-container img")
-          .attr({
-            src: featured.image.small,
-            alt: featured.title,
-          });
-        $container
-          .find(".update-card.featured .update-title")
-          .text(featured.title);
-        $container
-          .find(".update-card.featured .update-description")
-          .text(truncateText(featured.contentSnippet, 150));
-        $container
-          .find(".update-card.featured")
-          .wrap(
-            `<a href="${featured.link}" target="_blank" style="text-decoration: none; color: inherit;"></a>`
-          );
-
-        // Render 2 berita berikutnya (hanya title)
-        $container.find(".update-card:not(.featured)").each(function (index) {
-          if (categoryNews[index + 1]) {
-            const news = categoryNews[index + 1];
-            $(this).find(".update-title").text(news.title);
-            $(this).wrap(
-              `<a href="${news.link}" target="_blank" style="text-decoration: none; color: inherit;"></a>`
-            );
-          }
+    return $.get(penerbitApiUrl)
+      .then(function (res) {
+        const penerbitNews = res.data || [];
+        return penerbitNews.slice(0, 1).map(function (news) {
+          return {
+            news: news,
+            penerbitKey: penerbitKey,
+            penerbitNama: penerbitNama,
+          };
         });
       })
-      .fail(function (error) {
-        console.error(`Gagal mengambil berita kategori ${category}:`, error);
+      .catch(function () {
+        return [];
       });
+  });
+
+  Promise.all([cnnPromise, ...otherPromises]).then(function (results) {
+    const allPopularNews = results.flat();
+
+    allPopularNews.slice(0, totalPopularCards).forEach(function (item, index) {
+      const $card = $popularCards.eq(index);
+      $card.find("img").attr({
+        src: item.news.image.small,
+        alt: item.news.title,
+      });
+
+      $card
+        .find(".card-date")
+        .html(
+          `<p class="card-date">${formatDate(
+            item.news.isoDate
+          )} | <span><a href="/pages/profile-penerbit.html?penerbit=${
+            item.penerbitKey
+          }" class="card-publisher">${item.penerbitNama}</a></span></p>`
+        );
+
+      $card
+        .find(".card-title a")
+        .text(item.news.title)
+        .attr("href", item.news.link);
+
+      $card
+        .find(".card-description")
+        .text(truncateText(item.news.contentSnippet || "", 150));
+    });
+
+    console.log(
+      `Berita populer berhasil di-render: ${
+        allPopularNews.slice(0, totalPopularCards).length
+      } berita`
+    );
+  });
+
+  // 4. Fungsi untuk mengambil berita berdasarkan kategori
+  function fetchCategoryNews(category, containerSelector) {
+    const $container = $(containerSelector);
+    const maxNews = 3;
+    const categoryPromises = [];
+
+    allPenerbit.forEach(function (penerbitKey) {
+      const categoryUrl = `https://berita-indo-api.vercel.app/v1/${penerbitKey}/${category}`;
+      const penerbitNama = biografiPenerbit[penerbitKey].nama;
+
+      const promise = $.get(categoryUrl)
+        .then(function (response) {
+          const categoryNews = response.data || [];
+          if (categoryNews.length === 0) {
+            return [];
+          }
+          return categoryNews.slice(0, 1).map(function (news) {
+            return {
+              news: news,
+              penerbitKey: penerbitKey,
+              penerbitNama: penerbitNama,
+            };
+          });
+        })
+        .catch(function () {
+          return [];
+        });
+
+      categoryPromises.push(promise);
+    });
+
+    // Menunggu semua proses selesai baru dikirim dengan memakai promise
+    Promise.all(categoryPromises).then(function (results) {
+      const allCategoryNews = results.flat();
+
+      if (allCategoryNews.length === 0) {
+        return;
+      }
+
+      allCategoryNews.slice(0, maxNews).forEach(function (item, index) {
+        if (index === 0) {
+          $container
+            .find(".update-card.featured .update-img-container img")
+            .attr({
+              src: item.news.image.small,
+              alt: item.news.title,
+            });
+
+          $container
+            .find(".update-card.featured .update-title")
+            .text(item.news.title);
+
+          $container
+            .find(".update-card.featured .update-description")
+            .html(`${truncateText(item.news.contentSnippet || "", 100)} `);
+
+          if (!$container.find(".update-card.featured").parent().is("a")) {
+            $container
+              .find(".update-card.featured")
+              .wrap(
+                `<a href="${item.news.link}" target="_blank" style="text-decoration: none; color: inherit;"></a>`
+              );
+          }
+        } else {
+          const $regularCards = $container.find(".update-card:not(.featured)");
+          const cardIndex = index - 1;
+
+          if (cardIndex < $regularCards.length) {
+            const $card = $regularCards.eq(cardIndex);
+            $card.find(".update-title").html(`${item.news.title} `);
+
+            if (!$card.parent().is("a")) {
+              $card.wrap(
+                `<a href="${item.news.link}" target="_blank" style="text-decoration: none; color: inherit;"></a>`
+              );
+            }
+          }
+        }
+      });
+    });
   }
 
-  // 4. Render Update News untuk setiap kategori
-  // Array kategori yang tersedia
+  // 5. Render Update News untuk setiap kategori
   const categories = [
     "nasional",
     "teknologi",
@@ -140,23 +245,18 @@ $(document).ready(function () {
     "otomotif",
   ];
 
-  // Ambil hanya 4 kategori pertama untuk ditampilkan di halaman utama
   const displayCategories = categories.slice(0, 8);
-  console.log(displayCategories);
 
-  // Loop untuk mengambil berita setiap kategori
   displayCategories.forEach(function (category, index) {
     const containerSelector = `.update-news .update-category:nth-child(${
       index + 1
     })`;
 
-    // Update judul kategori
     const formattedCategory = category
       .replace(/-/g, " ")
       .replace(/\b\w/g, (l) => l.toUpperCase());
     $(`${containerSelector} .category-header h2`).text(formattedCategory);
 
-    // Fetch berita untuk kategori ini
     fetchCategoryNews(category, containerSelector);
   });
 });
