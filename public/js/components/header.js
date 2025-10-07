@@ -59,9 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* Set Link Kategori */
+    /* Set Link Kategori */
     document.querySelectorAll(".dropdown-menu a").forEach((a) => {
-        const label = a.textContent.trim().toLowerCase();
-        a.href = `/kategori/kategori.html?cat=${encodeURIComponent(label)}`;
+        const label = a.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+        a.href = `/pages/category.html?kategori=${encodeURIComponent(label)}`; // FIXED!
         a.classList.add("kategori");
         a.setAttribute("data-cat", label);
     });

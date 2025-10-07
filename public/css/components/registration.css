@@ -10,11 +10,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("../images/homepages.jpg") no-repeat center center;
+    background: url("../../images/homepages.jpg") no-repeat center center;
     background-size: cover;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     animation: fadeIn 1s ease-out;
+    padding: 15px;
 }
 
 @keyframes fadeIn {
@@ -29,7 +31,7 @@ body {
 }
 
 
-/* Background blur - dikurangi dan ditambah overlay gelap */
+/* Background blur - tanpa zoom */
 
 .background {
     position: absolute;
@@ -37,12 +39,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("../images/homepages.jpg") no-repeat center center;
+    background: url("../../images/homepages.jpg") no-repeat center center;
     background-size: cover;
     z-index: 1;
     filter: blur(4px);
-    /* dikurangi dari 8px ke 4px */
-    transform: scale(1.05);
 }
 
 
@@ -56,7 +56,6 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    /* overlay semi-transparan */
 }
 
 
@@ -65,10 +64,8 @@ body {
 .floating-element {
     position: absolute;
     background: rgba(255, 255, 255, 0.05);
-    /* lebih transparan */
     border-radius: 50%;
     animation: float 12s ease-in-out infinite;
-    /* lebih lambat dari 6s ke 12s */
 }
 
 .floating-element:nth-child(1) {
@@ -102,19 +99,18 @@ body {
     }
     50% {
         transform: translateY(-15px) rotate(180deg);
-        /* gerakan lebih halus */
     }
 }
 
 
-/* Glassmorphism login */
+/* Glassmorphism registration form */
 
-.login-container {
+.glass-form-container {
     position: relative;
-    width: 420px;
-    padding: 50px 40px;
+    max-width: 400px;
+    width: 100%;
+    padding: 30px 30px;
     background: rgba(255, 255, 255, 0.12);
-    /* sedikit lebih opaque */
     border-radius: 24px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -122,8 +118,8 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     z-index: 10;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* lebih spesifik */
     animation: slideUp 1s ease-out;
+    margin: auto;
 }
 
 @keyframes slideUp {
@@ -137,57 +133,50 @@ body {
     }
 }
 
-.login-container:hover {
+.glass-form-container:hover {
     transform: translateY(-3px);
-    /* dikurangi dari -5px */
     box-shadow: 0 30px 55px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.login-header {
+.glass-form-container h2 {
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.login-header h1 {
     color: #ffffff;
-    /* solid white untuk readability */
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    /* shadow untuk kontras */
 }
 
-.login-header p {
+.glass-form-container p {
+    text-align: center;
     color: rgba(255, 255, 255, 0.85);
-    /* lebih opaque */
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 25px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form-group {
     position: relative;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
+    text-align: left;
 }
 
 .form-group label {
     display: block;
     color: rgba(255, 255, 255, 0.95);
-    /* lebih jelas */
-    font-size: 14px;
-    margin-bottom: 8px;
+    font-size: 13px;
+    margin-bottom: 6px;
     font-weight: 500;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .form-group input {
     width: 100%;
-    padding: 16px 20px;
+    padding: 11px 16px;
     background: rgba(255, 255, 255, 0.15);
-    /* lebih opaque */
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    font-size: 16px;
+    border-radius: 14px;
+    font-size: 14px;
     color: #fff;
     outline: none;
     transition: all 0.3s ease;
@@ -195,111 +184,25 @@ body {
 
 .form-group input::placeholder {
     color: rgba(255, 255, 255, 0.6);
-    /* lebih jelas */
 }
 
 .form-group input:focus {
     background: rgba(255, 255, 255, 0.2);
-    /* lebih opaque saat focus */
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-    /* ganti glow effect */
     transform: translateY(-1px);
-    /* dikurangi */
-}
-
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-    font-size: 14px;
-}
-
-.remember-me {
-    display: flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
-    font-weight: 500;
-}
-
-.remember-me input {
-    margin-right: 8px;
-    width: 16px;
-    height: 16px;
-    accent-color: rgba(255, 255, 255, 0.9);
-}
-
-.forgot-password {
-    color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.forgot-password:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
-.login-btn {
-    width: 100%;
-    padding: 18px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.login-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
-    transform: translateY(-2px);
-    /* dikurangi dari -3px */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    /* dikurangi */
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.login-btn:active {
-    transform: translateY(0);
-    /* feedback saat klik */
-}
-
-.register-link {
-    text-align: center;
-    margin-top: 32px;
-    color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
-    font-size: 14px;
-}
-
-.register-link a {
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.register-link a:hover {
-    text-decoration: underline;
 }
 
 .message {
-    padding: 12px 16px;
-    margin-bottom: 20px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     display: none;
     backdrop-filter: blur(10px);
     animation: fadeMessage 0.5s ease-out;
+    text-align: center;
 }
 
 @keyframes fadeMessage {
@@ -315,44 +218,89 @@ body {
 
 .message.success {
     background: rgba(34, 197, 94, 0.25);
-    /* sedikit lebih opaque */
     border: 1px solid rgba(34, 197, 94, 0.4);
     color: #4ade80;
-    /* warna lebih terang */
 }
 
 .message.error {
     background: rgba(239, 68, 68, 0.25);
-    /* sedikit lebih opaque */
     border: 1px solid rgba(239, 68, 68, 0.4);
     color: #fca5a5;
-    /* warna lebih terang */
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-top: 6px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+}
+
+.login-link a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 768px) {
-    .login-container {
-        width: 80%;
-        padding: 35px 25px;
+    .glass-form-container {
+        width: 90%;
+        padding: 25px 25px;
     }
-    .login-header h1 {
-        font-size: 26px;
+    .glass-form-container h2 {
+        font-size: 24px;
     }
-    .login-header p {
-        font-size: 14px;
+    .glass-form-container p {
+        font-size: 13px;
     }
 }
 
 @media (max-width: 480px) {
-    .login-container {
-        width: 90%;
-        padding: 40px 30px;
+    body {
+        padding: 10px;
     }
-    .login-header h1 {
+    .glass-form-container {
+        width: 95%;
+        padding: 25px 20px;
+    }
+    .glass-form-container h2 {
         font-size: 22px;
     }
-    .form-options {
-        flex-direction: column;
-        gap: 16px;
-        align-items: flex-start;
+    .form-group {
+        margin-bottom: 12px;
+    }
+    .form-group input {
+        padding: 10px 14px;
     }
 }
