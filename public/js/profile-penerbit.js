@@ -1,4 +1,9 @@
 import { biografiPenerbit } from "../js/data/biografiPenerbit.js";
+import {
+  generateBeritaId,
+  isBookmarked,
+  initBookmarkButton,
+} from "../js/ultilitas/ultility.js";
 
 $(document).ready(function () {
   // Fungsi untuk mendapatkan parameter dari URL
@@ -57,6 +62,19 @@ $(document).ready(function () {
 
         // Loop untuk setiap artikel
         artikelTerbatas.forEach(function (artikel) {
+          // Data untuk bookmark
+          const itemData = {
+            berita: artikel,
+            slugPenerbit: penerbitSlug,
+            namaPenerbit: infoPenerbit ? infoPenerbit.nama : penerbit,
+          };
+
+          // Cek status bookmark
+          const beritaId = generateBeritaId(artikel);
+          const bookmarked = isBookmarked(beritaId);
+          const iconClass = bookmarked ? "bxs-bookmark" : "bx-bookmark";
+          const buttonClass = bookmarked ? "bookmarked" : "";
+
           var artikelCard = `
            <div class="news-card">
             <div class="news-image">
@@ -71,13 +89,27 @@ $(document).ready(function () {
             <p class="news-snippet">${
               artikel.contentSnippet || "Tidak ada deskripsi."
             }</p>
-            <a href="${
-              artikel.link
-            }" target="_blank" class="news-link">Baca Selengkapnya</a>
+            <div class="card-actions">
+                 <a href="${
+                   artikel.link
+                 }" target="_blank" class="news-link">Baca Selengkapnya</a>
+           
+                <button class="bookmark-btn ${buttonClass}">
+                  <i class="bx ${iconClass}"></i>
+                </button>
+                 </div>
             </div>
+           
          </div>
           `;
-          $("#artikel-container").append(artikelCard);
+
+          // Append card ke container
+          const $artikelCard = $(artikelCard);
+          $("#artikel-container").append($artikelCard);
+
+          // Initialize bookmark button untuk card ini
+          const $bookmarkBtn = $artikelCard.find(".bookmark-btn");
+          initBookmarkButton($bookmarkBtn, itemData);
         });
       } else {
         $("#artikel-container").html(
