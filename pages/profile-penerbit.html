@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="../public/css/components/footer.css" />
     <link rel="stylesheet" href="../public/css/variables/colorsFont.css" />
     <link rel="stylesheet" href="../public/css/profile-penerbit.css" />
+    <link rel="stylesheet" href="../public/css/components/bookmarkBtn.css" />
     <title>Penerbit Berita</title>
   </head>
 
   <body>
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
       <div class="navbar-container">
-        <a href="index.html" class="navbar-logo">FTI News</a>
+        <a href="/index.html" class="navbar-logo">FTI News</a>
         <button class="navbar-toggle">
           <span class="bar"></span>
           <span class="bar"></span>
@@ -25,7 +26,7 @@
         </button>
         <ul class="navbar-menu">
           <li><a href="/index.html">Beranda</a></li>
-          <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
+          <li><a href="/pages/about.html">Tentang Kami</a></li>
           <li class="dropdown">
             <button class="dropdown-button" id="dropdownBtn">
               Kategori
@@ -82,13 +83,12 @@
             </form>
           </div>
 
-          <a href="/pages/profile.html">
+          <a href="/pages/userprofile.html">
             <i class="bx bx-user-circle"></i>
           </a>
         </ul>
       </div>
     </nav>
-
     <main>
       <section id="penerbit-info">
         <div class="penerbit-identitas">
@@ -104,7 +104,7 @@
         <div id="artikel-container" class="artikel-grid"></div>
       </section>
     </main>
-    <footer class="footer hidden" id="footer">
+    <footer class="footer" id="footer">
       <div class="footer-container">
         <div class="footer-col footer-about">
           <h3 class="footer-title logo-text">FTI News</h3>
@@ -119,7 +119,7 @@
           <h3 class="footer-title">Link Penting</h3>
           <ul>
             <li><a href="/pages/bookmark.html">Bookmark</a></li>
-            <li><a href="/pages/aboutUs.html">Tentang Kami</a></li>
+            <li><a href="/pages/about.html">Tentang Kami</a></li>
             <li><a href="/pages/contact.html">Kontak & FAQ</a></li>
             <li><a href="/pages/terms.html">Ketentuan Pengguna</a></li>
           </ul>
