@@ -37,12 +37,17 @@
 }
 
 @media (max-width: 480px) {
+  .card-actions {
+    margin-top: 4px;
+    gap: 10px;
+    flex-direction: row-reverse;
+  }
   /* Bookmark Btn */
   .bookmark-btn {
-    width: 35px;
-    height: 35px;
+    width: 24px;
+    height: 24px;
   }
   .bookmark-btn i {
-    font-size: 18px;
+    font-size: 12px;
   }
 }
