@@ -17,7 +17,7 @@ function updateVisibility() {
         currentAngle < 0 ? currentAngle + 360 : currentAngle;
 
       // Menyembunyikan card terdepan yaitu yang diatas 269 derajat dan dibawah 91 derajat
-      if (normalizedAngle > 280 || normalizedAngle < 50) {
+      if (normalizedAngle > 270 || normalizedAngle < 90) {
         card.style.opacity = "0";
         card.style.pointerEvents = "none";
       } else {
