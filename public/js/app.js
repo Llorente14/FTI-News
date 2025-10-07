@@ -11,7 +11,7 @@ import {
 const semuaPenerbit = Object.keys(biografiPenerbit);
 const PENERBIT_CNN = "cnn-news";
 const JUMLAH_BERITA_CNN = 4;
-const JUMLAH_BERITA_PER_PENERBIT = 1;
+const JUMLAH_BERITA_PER_PENERBIT = 2;
 const MAKSIMAL_BERITA_KATEGORI = 3;
 const MAKSIMAL_KARAKTER_DESKRIPSI_POPULER = 150;
 const MAKSIMAL_KARAKTER_DESKRIPSI_UPDATE = 100;
