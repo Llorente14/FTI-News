@@ -363,8 +363,12 @@ main {
     font-size: 1.4rem;
   }
 
+  .news-card {
+    border-radius: 0.5rem;
+  }
+
   .news-image {
-    height: 180px;
+    height: 100%;
   }
 
   .news-content {
@@ -372,10 +376,33 @@ main {
   }
 
   .news-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.2;
   }
 
   .news-snippet {
+    line-height: 1.2;
     font-size: 0.9rem;
+  }
+
+  .news-link {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    height: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .news-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    transform: translateX(4px);
   }
 }
