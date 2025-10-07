@@ -1,0 +1,48 @@
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.bookmark-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.bookmark-btn i {
+  font-size: 20px;
+  color: #000;
+}
+
+/* Style ketika sudah di-bookmark */
+.bookmark-btn.bookmarked {
+  background-color: #fff;
+}
+
+.bookmark-btn.bookmarked i {
+  color: var(--color-warning);
+}
+
+@media (max-width: 480px) {
+  /* Bookmark Btn */
+  .bookmark-btn {
+    width: 35px;
+    height: 35px;
+  }
+  .bookmark-btn i {
+    font-size: 18px;
+  }
+}
