@@ -8,12 +8,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./public/css/components/header.css" />
+    <link rel="stylesheet" href="./public/css/components/footer.css" />
     <link rel="stylesheet" href="./public/css/variables/colorsFont.css" />
     <link rel="stylesheet" href="./public/css/homepage.css" />
     <title>FTI News</title>
   </head>
   <body>
-    <nav class="navbar">
+    <nav class="navbar hidden" id="navbar">
       <div class="navbar-container">
         <a href="index.html" class="navbar-logo">FTI News</a>
         <button class="navbar-toggle">
@@ -22,7 +23,7 @@
           <span class="bar"></span>
         </button>
         <ul class="navbar-menu">
-          <li><a href="#">Beranda</a></li>
+          <li><a href="/index.html">Beranda</a></li>
           <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
           <li class="dropdown">
             <button class="dropdown-button" id="dropdownBtn">
@@ -31,9 +32,36 @@
             </button>
             <div class="dropdown-content" id="dropdownContent">
               <ul class="dropdown-menu">
-                <li><a href="#">Politik</a></li>
-                <li><a href="#">Teknologi</a></li>
-                <li><a href="#">Sport</a></li>
+                <li>
+                  <a href="/pages/category.html?kategori=nasional">Nasional</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=teknologi"
+                    >Teknologi</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=gaya-hidup"
+                    >Gaya Hidup</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=internasional"
+                    >Internasional</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
+                </li>
               </ul>
             </div>
           </li>
@@ -60,55 +88,575 @@
       </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero hidden" id="hero">
       <div class="hero-text">
-        <h1>FTI News Selalu Di Depan, Always Stunning</h1>
+        <h1>FTI News Selalu Terdepan, Setiap Momen</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quod
-          aspernatur maxime saepe nesciunt? Minima alias dicta numquam similique
-          fuga labore blanditiis
+          Kami berkomitmen untuk menyajikan informasi yang relevan dan
+          terverifikasi, membantu Anda memahami isu-isu penting yang terjadi di
+          sekitar kita dan di seluruh dunia.
         </p>
       </div>
       <div class="hero-carousel" style="--width: 130px; --height: 150px">
         <div class="prev"><</div>
-        <div class="carousel-group" id="carousel" style="--quantity: 10">
+        <div class="carousel-group" id="carousel" style="--quantity: 8">
           <div class="carousel-card" style="--position: 1">
-            <img src="/public/images/Home-Ma.png" alt="" />
+            <a href="/pages/category.html?kategori=nasional">
+              <div class="card-content">
+                <div class="category">Politik</div>
+                <p class="sub-info">
+                  Analisis mendalam mengenai dinamika politik terkini, kebijakan
+                  pemerintah, dan dampaknya terhadap masyarakat luas.
+                </p>
+              </div>
+              <img
+                src="/public/images/Politik-Kategori.png"
+                alt="Gambar terkait Politik"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 2">
-            <img src="/public/images/Home-Ma.png" alt="" />
+            <a href="/pages/category.html?kategori=teknologi">
+              <div class="card-content">
+                <div class="category">Teknologi</div>
+                <p class="sub-info">
+                  Jelajahi inovasi terbaru di dunia teknologi, ulasan gawai
+                  canggih, dan tren digital yang membentuk masa depan kita.
+                </p>
+              </div>
+              <img
+                src="/public/images/Teknologi-Kategori.png"
+                alt="Gambar terkait Teknologi"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 3">
-            <img src="/public/images/Home-Ma.png" alt="" />
+            <a href="/pages/category.html?kategori=olahraga">
+              <div class="card-content">
+                <div class="category">Olahraga</div>
+                <p class="sub-info">
+                  Ikuti berita terhangat dari berbagai cabang olahraga, profil
+                  atlet inspiratif, dan ulasan pertandingan yang seru.
+                </p>
+              </div>
+              <img
+                src="/public/images/Olahraga-Kategori.jpg"
+                alt="Gambar terkait Olahraga"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 4">
-            <img src="/public/images/Home-Ma.png" alt="" />
+            <a href="/pages/category.html?kategori=ekonomi">
+              <div class="card-content">
+                <div class="category">Ekonomi</div>
+                <p class="sub-info">
+                  Wawasan terkini seputar pasar saham, perkembangan bisnis, dan
+                  strategi finansial untuk mengelola keuangan Anda.
+                </p>
+              </div>
+              <img
+                src="/public/images/Ekonomi-Kategori.png"
+                alt="Gambar terkait Ekonomi"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 5">
-            <img src="/public/images/Man-Terjangkau.png" alt="" />
+            <a href="/pages/category.html?kategori=hiburan">
+              <div class="card-content">
+                <div class="category">Hiburan</div>
+                <p class="sub-info">
+                  Dapatkan informasi terbaru dari dunia hiburan, mulai dari
+                  film, musik, hingga kehidupan para selebriti ternama.
+                </p>
+              </div>
+              <img
+                src="/public/images/Hiburan-Kategori.jpg"
+                alt="Gambar terkait Hiburan"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 6">
-            <img src="/public/images/Man-Terjangkau.png" alt="" />
+            <a href="/pages/category.html?kategori=gaya-hidup">
+              <div class="card-content">
+                <div class="category">Gaya Hidup</div>
+                <p class="sub-info">
+                  Temukan inspirasi untuk gaya hidup yang lebih baik, mencakup
+                  tips mode, kesehatan, dan tren terkini.
+                </p>
+              </div>
+              <img
+                src="/public/images/GayaHidup-Kategori.png"
+                alt="Gambar terkait Gaya Hidup"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 7">
-            <img src="/public/images/Man-Terjangkau.png" alt="" />
+            <a href="/pages/category.html?kategori=internasional">
+              <div class="card-content">
+                <div class="category">Internasional</div>
+                <p class="sub-info">
+                  Ikuti dinamika global, mulai dari hubungan diplomatik
+                  antarnegara, krisis internasional, hingga tren yang
+                  memengaruhi kehidupan di berbagai belahan dunia.
+                </p>
+              </div>
+              <img
+                src="/public/images/Internasional-Kategori.jpg"
+                alt="Gambar terkait Internasional"
+              />
+            </a>
           </div>
+
           <div class="carousel-card" style="--position: 8">
-            <img src="/public/images/Home-Ma.png" alt="" />
-          </div>
-          <div class="carousel-card" style="--position: 9">
-            <img src="/public/images/Home-Ma.png" alt="" />
-          </div>
-          <div class="carousel-card" style="--position: 10">
-            <img src="/public/images/Home-Ma.png" alt="" />
+            <a href="/pages/category.html?kategori=otomotif">
+              <div class="card-content">
+                <div class="category">Otomotif</div>
+                <p class="sub-info">
+                  Ulasan lengkap mobil dan motor terbaru, berita dari dunia
+                  balap, serta tips perawatan kendaraan Anda.
+                </p>
+              </div>
+              <img
+                src="/public/images/Otomotif-Kategori.webp"
+                alt="Gambar terkait Otomotif"
+              />
+            </a>
           </div>
         </div>
 
         <div class="next">></div>
       </div>
     </section>
-    <section class="content"></section>
-    <footer></footer>
+    <section class="content hidden" id="content">
+      <main class="main">
+        <div class="main-news">
+          <p class="news-category">Berita Utama</p>
+          <div class="img-container">
+            <p class="news-title">
+              She’s one of the few female designers in luxury fashion. Here’s
+              what she has to say
+            </p>
+            <a href="./pages/detailBerita.html">
+              <img src="./public/images/main-news.jpg" alt="" srcset="" />
+            </a>
+          </div>
+        </div>
+        <div class="sub-news">
+          <div class="news-card">
+            <div class="img-container">
+              <a href="./pages/detailBerita.html">
+                <img src="./public/images/main-news.jpg" alt="" srcset="" />
+              </a>
+            </div>
+            <p class="news-title">
+              GOP leaders say they will not give into Democratic demands on
+              funding bill as government shutdown looms
+            </p>
+          </div>
+          <div class="news-card">
+            <div class="img-container">
+              <a href="./pages/detailBerita.html">
+                <img src="./public/images/main-news.jpg" alt="" srcset="" />
+              </a>
+            </div>
+            <p class="news-title">
+              GOP leaders say they will not give into Democratic demands on
+              funding bill as government shutdown looms
+            </p>
+          </div>
+        </div>
+      </main>
+      <!-- Ini untuk berita populer (limit jadi 6 saja) -->
+      <div class="populer-news">
+        <p class="news-category">Berita Populer</p>
+        <div class="wrapper">
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet. Lorem, ipsum dolor sit amet
+                consectetur adipisicing elit. Dolore doloribus dolores ut
+                incidunt minus quam tempore excepturi quo, corrupti sed beatae
+                unde suscipit qui repellendus, corporis autem reprehenderit.
+                Quae, omnis.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet.
+              </p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-image-wrapper">
+              <img src="./public/images/main-news.jpg" />
+            </div>
+            <div class="card-content">
+              <span class="card-date">15 February</span>
+              <h2 class="card-title">
+                <a href="#">Lorem ipsum dolor nihil fuga optio!</a>
+              </h2>
+              <p class="card-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque
+                repudiandae asperiores amet.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Ini untuk berita update dari tiap kategori untuk yang chid pertama boleh ada gambar dan snippet seterusnay hanya title saja-->
+      <div class="update-news">
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Teknologi</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Tech News" />
+            </div>
+            <h3 class="update-title">
+              How the rise of green tech is feeding another environmental crisis
+            </h3>
+            <p class="update-description">
+              The world's race to decarbonise has led to the rise of electric
+              cars - and with it, soaring demand for lithium, which is required
+              for the batteries.
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              'A million jobs in London could be changed by AI'
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Politik</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Health News" />
+            </div>
+            <h3 class="update-title">
+              Is your friend draining your energy? Three ways to handle social
+              vampires
+            </h3>
+            <p class="update-description">
+              Three ways to handle friends who leave you feeling worse, not
+              better after you've met up.
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              'A mind game': Trump administration moves rock autism community
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Olahraga</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Culture News" />
+            </div>
+            <h3 class="update-title">
+              Demon Slayer star says anime film's success is mind-blowing
+            </h3>
+            <p class="update-description">
+              Zach Aguilar, who voices main character Tanjiro, says Infinity
+              Castle is a "cultural phenomenon".
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Dolly Parton postpones shows over 'health challenges'
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              The 100-year-old books saved from Venice's floods
+            </h3>
+          </div>
+        </div>
+
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Bisnis</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Arts News" />
+            </div>
+            <h3 class="update-title">
+              The 1958 Italian novel that skewered the super-rich
+            </h3>
+            <p class="update-description">
+              Lampedusa's mid-20th-Century novel The Leopard became a
+              bestseller, then a revered film, and is now a lavish Netflix
+              series. Why does it remain relevant today?
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Why history's 'most controversial' queen was so hated
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Bisnis</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Arts News" />
+            </div>
+            <h3 class="update-title">
+              The 1958 Italian novel that skewered the super-rich
+            </h3>
+            <p class="update-description">
+              Lampedusa's mid-20th-Century novel The Leopard became a
+              bestseller, then a revered film, and is now a lavish Netflix
+              series. Why does it remain relevant today?
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Why history's 'most controversial' queen was so hated
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Bisnis</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Arts News" />
+            </div>
+            <h3 class="update-title">
+              The 1958 Italian novel that skewered the super-rich
+            </h3>
+            <p class="update-description">
+              Lampedusa's mid-20th-Century novel The Leopard became a
+              bestseller, then a revered film, and is now a lavish Netflix
+              series. Why does it remain relevant today?
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Why history's 'most controversial' queen was so hated
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Bisnis</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Arts News" />
+            </div>
+            <h3 class="update-title">
+              The 1958 Italian novel that skewered the super-rich
+            </h3>
+            <p class="update-description">
+              Lampedusa's mid-20th-Century novel The Leopard became a
+              bestseller, then a revered film, and is now a lavish Netflix
+              series. Why does it remain relevant today?
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Why history's 'most controversial' queen was so hated
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+        <div class="update-category">
+          <div class="category-header">
+            <h2>Bisnis</h2>
+          </div>
+          <div class="update-card featured">
+            <div class="update-img-container">
+              <img src="./public/images/main-news.jpg" alt="Arts News" />
+            </div>
+            <h3 class="update-title">
+              The 1958 Italian novel that skewered the super-rich
+            </h3>
+            <p class="update-description">
+              Lampedusa's mid-20th-Century novel The Leopard became a
+              bestseller, then a revered film, and is now a lavish Netflix
+              series. Why does it remain relevant today?
+            </p>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Why history's 'most controversial' queen was so hated
+            </h3>
+          </div>
+          <div class="update-card">
+            <h3 class="update-title">
+              Otherworldly scenes of a submerged forest
+            </h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer hidden" id="footer">
+      <div class="footer-container">
+        <div class="footer-col footer-about">
+          <h3 class="footer-title logo-text">FTI News</h3>
+          <p>
+            Kami berkomitmen untuk menyajikan informasi yang relevan dan
+            terverifikasi, membantu Anda memahami isu-isu penting yang terjadi
+            di sekitar kita dan di seluruh dunia.
+          </p>
+        </div>
+
+        <div class="footer-col footer-links">
+          <h3 class="footer-title">Link Penting</h3>
+          <ul>
+            <li><a href="/pages/bookmark.html">Bookmark</a></li>
+            <li><a href="/pages/aboutUs.html">Tentang Kami</a></li>
+            <li><a href="/pages/contact.html">Kontak & FAQ</a></li>
+            <li><a href="/pages/terms.html">Ketentuan Pengguna</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-tags">
+          <h3 class="footer-title">Cari Berdasarkan Kategori</h3>
+          <div class="tag-container">
+            <a href="/pages/category.html?kategori=nasional">Nasional</a>
+            <a href="/pages/category.html?kategori=teknologi">Teknologi</a>
+            <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
+            <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+            <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+            <a href="/pages/category.html?kategori=gaya-hidup">Gaya Hidup</a>
+            <a href="/pages/category.html?kategori=internasional"
+              >Internasional</a
+            >
+            <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
+          </div>
+        </div>
+
+        <div class="footer-col footer-social">
+          <h3 class="footer-title">Media Sosial</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          Copyright &copy; 2025 FTI News by Kelompok 1. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="/public/js/app.js"></script>
     <script src="/public/js/components/header.js"></script>
     <script src="/public/js/components/hero-carousel.js"></script>
