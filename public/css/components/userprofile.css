@@ -1,5 +1,6 @@
 :root {
-    --primary-color: #ACB9AE;
+    --primary-color: rgb(255, 205, 147);
+    --primary-color-hover: oklch(79% 0.184 86.047);
     --background-color: #EFEAE6;
     --card-background: #F8F5F2;
     --text-color: #4A443F;
@@ -313,7 +314,7 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #98a79b;
+    background-color: var(--primary-color-hover);
 }
 
 .close-btn {

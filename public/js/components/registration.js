@@ -1,187 +1,189 @@
 // Simulasi database user (dalam aplikasi real, ini ada di backend)
-let registeredUsers = [];
+document.addEventListener('DOMContentLoaded', () => {
+    let registeredUsers = [];
 
-function showMessage(message, isSuccess = false) {
-    const msgElement = document.getElementById('registMsg');
+    function showMessage(message, isSuccess = false) {
+        const msgElement = document.getElementById('registMsg');
 
-    if (!msgElement) {
-        alert(message); // Fallback jika element tidak ditemukan
-        return;
+        if (!msgElement) {
+            alert(message); // Fallback jika element tidak ditemukan
+            return;
+        }
+
+        // Reset class dulu
+        msgElement.className = 'message';
+        msgElement.textContent = message;
+
+        // Tambahkan class success atau error
+        if (isSuccess) {
+            msgElement.classList.add('success');
+        } else {
+            msgElement.classList.add('error');
+        }
+
+        // Pastikan terlihat
+        msgElement.style.display = 'block';
+        msgElement.style.opacity = '1';
+
+        console.log('Message shown:', message, isSuccess ? 'SUCCESS' : 'ERROR');
     }
 
-    // Reset class dulu
-    msgElement.className = 'message';
-    msgElement.textContent = message;
+    // Load registered users saat halaman dimuat
+    function loadUsers() {
+        const stored = localStorage.getItem('registeredUsers');
+        console.log('Loading users from localStorage...');
 
-    // Tambahkan class success atau error
-    if (isSuccess) {
-        msgElement.classList.add('success');
-    } else {
-        msgElement.classList.add('error');
-    }
-
-    // Pastikan terlihat
-    msgElement.style.display = 'block';
-    msgElement.style.opacity = '1';
-
-    console.log('Message shown:', message, isSuccess ? 'SUCCESS' : 'ERROR');
-}
-
-// Load registered users saat halaman dimuat
-function loadUsers() {
-    const stored = localStorage.getItem('registeredUsers');
-    console.log('Loading users from localStorage...');
-
-    if (stored) {
-        try {
-            registeredUsers = JSON.parse(stored);
-            console.log('Users loaded:', registeredUsers.length);
-        } catch (e) {
-            console.error('Error parsing users:', e);
+        if (stored) {
+            try {
+                registeredUsers = JSON.parse(stored);
+                console.log('Users loaded:', registeredUsers.length);
+            } catch (e) {
+                console.error('Error parsing users:', e);
+                registeredUsers = [];
+            }
+        } else {
+            console.log('No users found in localStorage');
             registeredUsers = [];
         }
-    } else {
-        console.log('No users found in localStorage');
-        registeredUsers = [];
     }
-}
 
-// Simpan users ke storage
-function saveUsers() {
-    try {
-        const jsonData = JSON.stringify(registeredUsers);
-        localStorage.setItem('registeredUsers', jsonData);
-        console.log('Users saved successfully:', registeredUsers.length);
+    // Simpan users ke storage
+    function saveUsers() {
+        try {
+            const jsonData = JSON.stringify(registeredUsers);
+            localStorage.setItem('registeredUsers', jsonData);
+            console.log('Users saved successfully:', registeredUsers.length);
 
-        // Verifikasi save berhasil
-        const verify = localStorage.getItem('registeredUsers');
-        if (verify) {
-            console.log('✅ Save verified!');
-            return true;
-        } else {
-            console.error('❌ Save failed - verification failed');
+            // Verifikasi save berhasil
+            const verify = localStorage.getItem('registeredUsers');
+            if (verify) {
+                console.log('✅ Save verified!');
+                return true;
+            } else {
+                console.error('❌ Save failed - verification failed');
+                return false;
+            }
+        } catch (e) {
+            console.error('❌ Error saving users:', e);
+            alert('Gagal menyimpan data: ' + e.message);
             return false;
         }
-    } catch (e) {
-        console.error('❌ Error saving users:', e);
-        alert('Gagal menyimpan data: ' + e.message);
-        return false;
-    }
-}
-
-// Cek apakah email sudah terdaftar
-function isEmailRegistered(email) {
-    const exists = registeredUsers.some(user =>
-        user.email.toLowerCase() === email.toLowerCase()
-    );
-    console.log('Email check:', email, exists ? 'ALREADY EXISTS' : 'AVAILABLE');
-    return exists;
-}
-
-function handleRegistration(event) {
-    event.preventDefault();
-    console.log('=== REGISTRATION STARTED ===');
-
-    const name = document.getElementById('registName').value.trim();
-    const email = document.getElementById('registEmail').value.trim();
-    const phone = document.getElementById('registPhone').value.trim();
-    const pass = document.getElementById('registPassword').value;
-    const confirmPass = document.getElementById('registConfirm').value;
-
-    console.log('Input data:', { name, email, phone, passLength: pass.length });
-
-    // Validasi semua field terisi
-    if (!name || !email || !pass || !phone || !confirmPass) {
-        console.log('❌ Validation failed: empty fields');
-        showMessage("Semua kolom wajib diisi.");
-        return;
-    }
-
-    // Validasi nama
-    if (name.length < 3 || name.length > 32 || /\d/.test(name)) {
-        console.log('❌ Validation failed: invalid name');
-        showMessage("Nama lengkap tidak valid (3-32 karakter, tanpa angka).");
-        return;
-    }
-
-    // Validasi email
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-        console.log('❌ Validation failed: invalid email format');
-        showMessage("Format email tidak valid.");
-        return;
     }
 
     // Cek apakah email sudah terdaftar
-    if (isEmailRegistered(email)) {
-        console.log('❌ Validation failed: email already registered');
-        showMessage("Email sudah terdaftar. Silakan gunakan email lain atau login.");
-        return;
+    function isEmailRegistered(email) {
+        const exists = registeredUsers.some(user =>
+            user.email.toLowerCase() === email.toLowerCase()
+        );
+        console.log('Email check:', email, exists ? 'ALREADY EXISTS' : 'AVAILABLE');
+        return exists;
     }
 
-    // Validasi nomor HP
-    if (!/^08\d{8,14}$/.test(phone)) {
-        console.log('❌ Validation failed: invalid phone');
-        showMessage("Format nomor HP tidak valid (diawali 08, total 10-16 digit angka).");
-        return;
+    function handleRegistration(event) {
+        event.preventDefault();
+        console.log('=== REGISTRATION STARTED ===');
+
+        const name = document.getElementById('registName').value.trim();
+        const email = document.getElementById('registEmail').value.trim();
+        const phone = document.getElementById('registPhone').value.trim();
+        const pass = document.getElementById('registPassword').value;
+        const confirmPass = document.getElementById('registConfirm').value;
+
+        console.log('Input data:', { name, email, phone, passLength: pass.length });
+
+        // Validasi semua field terisi
+        if (!name || !email || !pass || !phone || !confirmPass) {
+            console.log('❌ Validation failed: empty fields');
+            showMessage("Semua kolom wajib diisi.");
+            return;
+        }
+
+        // Validasi nama
+        if (name.length < 3 || name.length > 32 || /\d/.test(name)) {
+            console.log('❌ Validation failed: invalid name');
+            showMessage("Nama lengkap tidak valid (3-32 karakter, tanpa angka).");
+            return;
+        }
+
+        // Validasi email
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            console.log('❌ Validation failed: invalid email format');
+            showMessage("Format email tidak valid.");
+            return;
+        }
+
+        // Cek apakah email sudah terdaftar
+        if (isEmailRegistered(email)) {
+            console.log('❌ Validation failed: email already registered');
+            showMessage("Email sudah terdaftar. Silakan gunakan email lain atau login.");
+            return;
+        }
+
+        // Validasi nomor HP
+        if (!/^08\d{8,14}$/.test(phone)) {
+            console.log('❌ Validation failed: invalid phone');
+            showMessage("Format nomor HP tidak valid (diawali 08, total 10-16 digit angka).");
+            return;
+        }
+
+        // Validasi password
+        if (pass.length < 8) {
+            console.log('❌ Validation failed: password too short');
+            showMessage("Kata sandi minimal 8 karakter.");
+            return;
+        }
+
+        // Validasi konfirmasi password
+        if (pass !== confirmPass) {
+            console.log('❌ Validation failed: password mismatch');
+            showMessage("Konfirmasi kata sandi tidak cocok.");
+            return;
+        }
+
+        console.log('✅ All validations passed!');
+
+        // Simpan user baru
+        const newUser = {
+            name: name,
+            email: email,
+            phone: phone,
+            password: pass, // NOTE: Dalam aplikasi real, password harus di-hash!
+            registeredAt: new Date().toISOString()
+        };
+
+        console.log('Creating new user:', newUser.email);
+        registeredUsers.push(newUser);
+
+        const saved = saveUsers();
+
+        if (saved) {
+            console.log('✅ Registration successful!');
+            showMessage("✅ Pendaftaran berhasil! Anda akan diarahkan ke halaman login.", true);
+
+            // Reset form
+            document.getElementById('registForm').reset();
+
+            // Redirect setelah 2 detik
+            console.log('Redirecting in 2 seconds...');
+            setTimeout(() => {
+                console.log('Redirecting now...');
+                window.location.href = 'login.html';
+            }, 2000);
+        } else {
+            console.log('❌ Registration failed - save error');
+            showMessage("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
+        }
     }
 
-    // Validasi password
-    if (pass.length < 8) {
-        console.log('❌ Validation failed: password too short');
-        showMessage("Kata sandi minimal 8 karakter.");
-        return;
+    // Load users saat halaman dimuat
+    console.log('=== Registration.js loaded ===');
+    loadUsers();
+
+    // Debug info
+    window.debugRegistration = function () {
+        console.log('=== DEBUG INFO ===');
+        console.log('Total registered users:', registeredUsers.length);
+        console.log('Users:', registeredUsers);
+        console.log('localStorage:', localStorage.getItem('registeredUsers'));
     }
-
-    // Validasi konfirmasi password
-    if (pass !== confirmPass) {
-        console.log('❌ Validation failed: password mismatch');
-        showMessage("Konfirmasi kata sandi tidak cocok.");
-        return;
-    }
-
-    console.log('✅ All validations passed!');
-
-    // Simpan user baru
-    const newUser = {
-        name: name,
-        email: email,
-        phone: phone,
-        password: pass, // NOTE: Dalam aplikasi real, password harus di-hash!
-        registeredAt: new Date().toISOString()
-    };
-
-    console.log('Creating new user:', newUser.email);
-    registeredUsers.push(newUser);
-
-    const saved = saveUsers();
-
-    if (saved) {
-        console.log('✅ Registration successful!');
-        showMessage("✅ Pendaftaran berhasil! Anda akan diarahkan ke halaman login.", true);
-
-        // Reset form
-        document.getElementById('registForm').reset();
-
-        // Redirect setelah 2 detik
-        console.log('Redirecting in 2 seconds...');
-        setTimeout(() => {
-            console.log('Redirecting now...');
-            window.location.href = 'login.html';
-        }, 2000);
-    } else {
-        console.log('❌ Registration failed - save error');
-        showMessage("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
-    }
-}
-
-// Load users saat halaman dimuat
-console.log('=== Registration.js loaded ===');
-loadUsers();
-
-// Debug info
-window.debugRegistration = function () {
-    console.log('=== DEBUG INFO ===');
-    console.log('Total registered users:', registeredUsers.length);
-    console.log('Users:', registeredUsers);
-    console.log('localStorage:', localStorage.getItem('registeredUsers'));
-};
+});
