@@ -99,7 +99,6 @@ $(document).ready(function () {
                 </button>
                  </div>
             </div>
-           
          </div>
           `;
 
