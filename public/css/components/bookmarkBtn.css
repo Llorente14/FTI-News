@@ -6,8 +6,8 @@
 }
 
 .bookmark-btn {
-  width: 40px;
-  height: 40px;
+  flex-shrink: 0;
+  padding: 8px;
   border-radius: 50%;
   border: 1px solid #000;
   background-color: transparent;
@@ -44,10 +44,9 @@
   }
   /* Bookmark Btn */
   .bookmark-btn {
-    width: 24px;
-    height: 24px;
+    padding: 4px;
   }
   .bookmark-btn i {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
