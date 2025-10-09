@@ -1,6 +1,7 @@
-@import url(variables/colorsFont.css);
+html, body {
+    width: 100%;
+}
 
-/* Pengaturan Dasar & Font */
 * {
     padding: 0;
     margin: 0;
@@ -10,147 +11,198 @@
 
 body {
     position: relative;
-    width: 100dvw;
     display: flex;
     flex-direction: column;
     background-color: var(--color-base-200);
-    overflow-x: hidden;
 }
 
-/* Kontainer Utama */
+/* ================================= */
+/* == KONTAINER UTAMA & JUDUL     == */
+/* ================================= */
 .search-page-container {
+    width: 100%;
     max-width: 800px;
-    margin: 40px auto; /* Menambah margin atas/bawah dan menengahkan konten */
+    margin: 40px auto;
+    padding: 0 1rem;
 }
 
-/* Bagian 1: Bar Pencarian */
+.search-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-base-content);
+}
+
+/* ================================= */
+/* == BAR PENCARIAN == */
+/* ================================= */
 .search-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
-    background-color: var(--color-base-100);
-    padding: 12px 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Menambahkan efek shadow yang lembut */
+    background-color: var(--color-base-200);
+    border-radius: 10px;
+    transition: all 0.2s ease, border 0.3s ease-in-out;
+    width: 100%;
+    border: 2px solid var(--color-base-300);
+    margin-bottom: 2rem;
+    overflow: hidden
 }
 
-/* Gaya untuk field input di dalam search bar */
+.search-bar:focus-within {
+    border: 2px solid var(--color-accent-border);
+    box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.1);
+}
+
 .search-bar input {
-    flex-grow: 1;
+    flex: 1;
+    padding: 0.75rem 1rem;
     border: none;
-    outline: none;
-    font-size: 1.2rem;
+    background: transparent;
     color: var(--color-base-content);
-    background-color: transparent;
-    padding: 0;
+    font-size: 1.2rem;
+    outline: none;
 }
 
-/* Gaya umum untuk tombol di dalam search bar */
-.search-bar button {
+.search-bar input::placeholder {
+    color: oklch(from var(--color-base-content) l c h / 0.6);
+}
+
+/* Tombol cari di kanan */
+.search-bar .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
     border: none;
-    background: none;
     cursor: pointer;
-    padding: 0 8px;
+    transition: all 0.1s ease;
+    width: 48px;
+    height: 100%;
+    margin: 0;
 }
 
-/* Gaya untuk tombol hapus */
-.search-bar .clear-btn {
-    font-size: 1.5rem;
+.search-bar .search-btn:hover {
+    background-color: var(--color-accent-border);
+}
+
+.search-bar .search-btn:hover i {
     color: var(--color-neutral);
 }
 
-/* Gaya untuk tombol cari */
-.search-bar .search-btn {
-    background-color: var(--color-base-content);
-    color: var(--color-base-100);
+.search-bar .search-btn i {
+    font-size: 2rem;
+}
+
+/* Sembunyikan tombol clear (×) */
+.search-bar .clear-btn {
+    display: none;
+}
+
+/* ============================================== */
+/* == HASIL PENCARIAN (LAYOUT GRID)            == */
+/* ============================================== */
+.search-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* ==================================================== */
+/* == OVERRIDE UNTUK INFO PENERBIT & TANGGAL         == */
+/* ==================================================== */
+.search-results .news-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-neutral);
+    margin-bottom: 0.5rem;
+}
+
+.search-results .news-publisher {
+    font-weight: 600;
+    color: var(--color-neutral);
+    text-decoration: none;
+}
+
+.search-results .news-publisher:hover {
+    text-decoration: underline;
+}
+
+.search-results .news-date::after {
+    content: '|';
+    margin-left: 0.5rem;
+    font-weight: normal;
+    color: var(--color-base-300);
+}
+
+/* =========================== */
+/* == PAGINATION & LOADER   == */
+/* =========================== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.pagination-container .page-btn {
+    border: none; 
+    background-color: var(--color-accent);
+    color: var(--color-accent-content); 
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 12px;
     width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    margin-left: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Gaya untuk ikon di dalam tombol cari */
-.search-bar .search-btn .fa-search {
-    font-size: 1rem;
+/* GAYA HOVER (WARNA TOSKA/PRIMARY) */
+.pagination-container .page-btn:hover:not(.active):not(.disabled) {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
 }
 
-/* Bagian 2: Kartu Berita */
-.news-card {
-    display: flex;
-    align-items: stretch;
-    gap: 20px;
+/* GAYA TOMBOL AKTIF (BIARKAN WARNA TOSKA) */
+.pagination-container .page-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    cursor: default;
+}
+
+/* GAYA TOMBOL NON-AKTIF */
+.pagination-container .page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
     background-color: var(--color-base-300);
-    border-radius: 8px;
-    border: 1px solid var(--color-base-300);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    overflow: hidden;
-}
-
-.card-image img {
-    width: 150px;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.card-content {
-    flex: 1;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-content h2 {
-    font-size: 1.5rem;
-    margin: 4px 0 8px 0;
-    font-weight: 600;
-    color: var(--color-base-content);
-}
-
-.card-content p {
-    margin: 0;
-    line-height: 1.5;
-}
-
-.card-content .source {
-    font-size: 0.9rem;
-    color: var(--color-neutral);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.card-content .snippet {
-    font-size: 1rem;
-    color: var(--color-base-content);
-    margin-bottom: 12px;
-}
-
-.card-content .timestamp {
-    font-size: 0.9rem;
     color: var(--color-neutral);
 }
 
-/* --- TAMBAHAN UNTUK KARTU BERITA YANG BISA DIKLIK --- */
-
-/* Ini menargetkan tag <a> yang membungkus kartu */
-a.news-card-link {
-    display: block; /* Membuat link berperilaku sebagai blok */
-    text-decoration: none; /* Menghilangkan garis bawah dari link */
-    color: inherit; /* Membuat warna teks mengikuti induknya */
-    margin-bottom: 32px; /* Memberi jarak antar kartu */
+/* =========================================== */
+/* == TAMPILAN RESPONSIVE (TABLET & MOBILE) == */
+/* =========================================== */
+@media (max-width: 899px) {
+    .search-results {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .news-image {
+        height: auto !important;
+    }
 }
 
-/* Efek hover untuk kartu yang dibungkus link */
-a.news-card-link:hover .news-card {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-    border-color: var(--color-secondary-content);
-}
-
-/* Beri garis bawah pada judul saat seluruh kartu di-hover */
-a.news-card-link:hover h2 {
-    text-decoration: underline;
+@media (max-width: 480px) {
+    .search-results {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .news-image {
+        height: auto !important;
+    }
 }

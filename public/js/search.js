@@ -1,97 +1,178 @@
-$(document).ready(function () {
-    let allNewsData = []; // Variabel untuk menyimpan semua data berita
-    const newsContainer = $(".search-results");
+import { biografiPenerbit } from '/public/js/data/biografiPenerbit.js';
+import {
+    generateBeritaId,
+    isBookmarked,
+    initBookmarkButton,
+    setDetailBerita 
+} from "../js/ultilitas/ultility.js";
 
-    // --- Helper Functions ---
+$(document).ready(function () {
+    let currentPage = 1;
+    const itemsPerPage = 9;
+    let allNewsData = [];
+    const newsContainer = $(".search-results");
+    const paginationContainer = $(".pagination-container");
+
+    // Fungsi format tanggal
     function formatDate(isoDate) {
+        if (!isoDate) return "";
         const date = new Date(isoDate);
         const options = { day: "numeric", month: "long", year: "numeric" };
         return date.toLocaleDateString("id-ID", options);
     }
 
-    function truncateText(text, maxLength) {
-        if (!text) return "";
-        if (text.length > maxLength) {
-        return text.substring(0, maxLength) + "...";
+    // Fungsi pagination
+    function renderPagination(totalItems, query) {
+        paginationContainer.empty();
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        if (totalPages <= 1) return;
+        const createButton = (text, page) => {
+            const btn = $(`<button class="page-btn">${text}</button>`);
+            btn.on('click', function() {
+                if ($(this).is('.disabled, .active')) return;
+                currentPage = page;
+                renderResults(query);
+                $('html, body').animate({ scrollTop: newsContainer.offset().top - 100 }, 'slow');
+            });
+            return btn;
+        };
+        const prevButton = createButton('<', currentPage - 1);
+        if (currentPage === 1) prevButton.addClass('disabled');
+        paginationContainer.append(prevButton);
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, currentPage + 1);
+        if (currentPage === 1) endPage = Math.min(totalPages, 3);
+        if (currentPage === totalPages) startPage = Math.max(1, totalPages - 2);
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = createButton(i, i);
+            if (i === currentPage) pageButton.addClass('active');
+            paginationContainer.append(pageButton);
         }
-        return text;
+        const nextButton = createButton('>', currentPage + 1);
+        if (currentPage === totalPages) nextButton.addClass('disabled');
+        paginationContainer.append(nextButton);
     }
 
-    // --- Fungsi untuk memfilter dan menampilkan hasil ---
+    // Fungsi Render Utama (Dengan Logika Bookmark)
     function renderResults(query) {
-        newsContainer.empty(); // Kosongkan hasil sebelumnya
+        newsContainer.empty();
 
-        // Jika query kosong, jangan tampilkan apa-apa
         if (!query) {
             $('.search-title').text("Silakan Masukkan Kata Kunci");
+            paginationContainer.empty();
             return;
         }
 
         $('.search-title').text(`Hasil Pencarian untuk "${query}"`);
-
-        // Filter array allNewsData berdasarkan judul
         const filteredNews = allNewsData.filter(function (news) {
-        // Ubah judul berita dan query ke huruf kecil agar pencarian tidak case-sensitive
-        const title = news.title.toLowerCase();
-        const searchQuery = query.toLowerCase();
-        return title.includes(searchQuery);
+            const title = (news.title || "").toLowerCase();
+            return title.includes(query.toLowerCase());
         });
 
         if (filteredNews.length > 0) {
-        // Jika ada hasil yang cocok, tampilkan
-        filteredNews.forEach(function (news) {
-            const newsCardHTML = `
-                <a href="${news.link}" target="_blank" rel="noopener noreferrer" class="news-card-link">
-                <article class="news-card">
-                    <div class="card-image">
-                        <img src="${news.image.small}" alt="${news.title}">
+            filteredNews.sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const paginatedItems = filteredNews.slice(startIndex, endIndex);
+
+            paginatedItems.forEach(function (news) {
+                const publisherKey = news.publisher;
+                const publisherInfo = biografiPenerbit[publisherKey];
+                const publisherName = publisherInfo ? publisherInfo.nama : (publisherKey || "").replace('-', ' ').toUpperCase();
+
+                const newsCardHTML = `
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img 
+                                src="${news.image.small || "/public/images/no-image.jpg"}" 
+                                alt="${news.title}"
+                                onerror="this.src='/public/images/no-image.jpg'"
+                            >
+                        </div>
+                        <div class="news-content">
+                            <div class="news-info">
+                                <span class="news-date">${formatDate(news.isoDate)}</span>
+                                <a href="/pages/profile-penerbit.html?penerbit=${publisherKey}" class="news-publisher">${publisherName}</a>
+                            </div>
+                            <h3 class="news-title">${news.title}</h3>
+                            <p class="news-snippet">${news.contentSnippet || "Tidak ada deskripsi."}</p>
+                            <div class="card-actions">
+                                <a href="#" class="news-link">Baca Selengkapnya</a>
+                                <button class="bookmark-btn">
+                                    <i class="bx bx-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <p class="source">CNN News</p>
-                        <h2>${news.title}</h2>
-                        <p class="snippet">${truncateText(news.contentSnippet, 100)}</p>
-                        <p class="timestamp">${formatDate(news.isoDate)}</p>
-                    </div>
-                </article>
-                </a>
-            `;
-            newsContainer.append(newsCardHTML);
-        });
+                `;
+
+                const $card = $(newsCardHTML);
+                const dataBerita = {
+                    berita: news,
+                    slugPenerbit: publisherKey,
+                    namaPenerbit: publisherName,
+                };
+                const $bookmarkBtn = $card.find('.bookmark-btn');
+                initBookmarkButton($bookmarkBtn, dataBerita);
+                
+                $card.find('.news-link').on('click', function(e) {
+                    e.preventDefault();
+                    setDetailBerita(news, publisherKey, publisherName);
+                });
+                newsContainer.append($card);
+            });
+
+            renderPagination(filteredNews.length, query);
+
         } else {
-        // Jika tidak ada hasil setelah filter
-        newsContainer.html(`<p style="text-align: center;">Tidak ada hasil ditemukan untuk "${query}".</p>`);
+            newsContainer.html(`<p style="text-align: left;">Tidak ada hasil ditemukan untuk "${query}".</p>`);
+            paginationContainer.empty();
         }
     }
 
-    // --- Alur Utama ---
-
-    // 1. Ambil SEMUA berita dari CNN saat halaman dimuat
-    newsContainer.html(`<p style="text-align: center;">Mempersiapkan data berita...</p>`);
-    $.get("https://berita-indo-api.vercel.app/v1/cnn-news")
-        .done(function (response) {
-        // 2. Simpan data ke variabel allNewsData
-        allNewsData = response.data || [];
-        
-        // 3. Ambil query dari URL dan jalankan fungsi renderResults pertama kali
-        const urlParams = new URLSearchParams(window.location.search);
-        const initialQuery = urlParams.get('q');
-        if (initialQuery) {
-            $('.search-bar input').val(initialQuery);
-            renderResults(initialQuery); // Tampilkan hasil awal
-        } else {
-            newsContainer.empty();
-            $('.search-title').text("Silakan Masukkan Kata Kunci");
-        }
-
+    //PROSES PENGAMBILAN DATA AWAL
+    newsContainer.html(`<div class="loading-container"><p class="loading-text">Memuat berita<span>.</span><span>.</span><span>.</span></p></div>`);
+    const sources = Object.keys(biografiPenerbit);
+    const apiRequests = sources.map(function (source) {
+        const apiUrl = `https://berita-indo-api.vercel.app/v1/${source}`;
+        return $.get(apiUrl).catch(() => null);
+    });
+    $.when.apply($, apiRequests)
+        .done(function () {
+            for (let i = 0; i < arguments.length; i++) {
+                let result = arguments[i];
+                if (result === null) continue;
+                let response = Array.isArray(result) ? result[0] : result;
+                const sourceKey = sources[i];
+                if (response.data) {
+                    const newsWithPublisher = response.data.map(post => {
+                        post.publisher = sourceKey;
+                        return post;
+                    });
+                    allNewsData = allNewsData.concat(newsWithPublisher);
+                }
+            }
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialQuery = urlParams.get('search');
+            if (initialQuery) {
+                $('.search-bar input').val(initialQuery);
+                renderResults(initialQuery);
+            } else {
+                newsContainer.empty();
+                $('.search-title').text("Silakan Masukkan Kata Kunci");
+            }
         })
-        .fail(function () {
-        newsContainer.html('<p style="text-align: center;">Gagal memuat data awal dari API. Coba refresh halaman.</p>');
+        .fail(function() {
+            newsContainer.html('<p style="text-align: center;">Gagal memuat data awal dari API. Coba refresh halaman.</p>');
         });
-
-    // 4. Siapkan event listener untuk pencarian berikutnya (TANPA memanggil API lagi)
+    
+    // Handler untuk form pencarian (tidak berubah)
     $('.search-bar').on('submit', function(event) {
         event.preventDefault();
+        currentPage = 1;
         const newQuery = $('.search-bar input').val();
-        renderResults(newQuery); // Langsung filter data yang sudah ada
+        renderResults(newQuery);
     });
+    
 });

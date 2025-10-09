@@ -165,7 +165,7 @@
 }
 
 .search-container {
-  display: none;
+  display: flex;
   align-items: center;
   position: relative;
 }
