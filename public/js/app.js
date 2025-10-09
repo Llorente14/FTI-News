@@ -480,5 +480,6 @@ function potongTeks(teks, panjangMaksimal) {
  */
 function buatUrlApi(slugPenerbit, kategori = "") {
   const baseUrl = `https://berita-indo-api.vercel.app/v1/${slugPenerbit}`;
-  return kategori ? `${baseUrl}/${kategori}` : baseUrl;
+  return kategori ? `${baseUrl}/${kategori}` : baseUrl; 
 }
+

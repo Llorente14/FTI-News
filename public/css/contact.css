@@ -1,62 +1,122 @@
+/* Base variables for colors */
+:root {
+  --color-base-100: #ffffff;
+  --color-base-300: #d1d5db;
+  --color-base-content: #1f2937;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-green-100: #dcfce7;
+  --color-green-700: #15803d;
+  --color-green-border: #86efac;
+}
+
 /* Using variables defined in header.css */
 body {
-    font-family: monospace;
-    background-color: var(--color-base-100);
-    color: var(--color-base-content);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+  font-family: monospace;
+  background-color: var(--color-base-100);
+  color: var(--color-base-content);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
 .contact-container {
-    max-width: 900px;
-    margin: 3rem auto;
-    padding: 2rem;
-    background-color: var(--color-base-100);
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: var(--color-base-100);
 }
 
 .contact-container h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-base-content);
-    border-bottom: 2px solid var(--color-base-300);
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-base-content);
+  border-bottom: 2px solid var(--color-base-300);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .contact-section {
-    margin-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .contact-section h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-base-content);
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-base-content);
+  margin-bottom: 1rem;
 }
 
 .contact-section p {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .contact-section p strong {
-    font-weight: 600;
-    display: inline-block;
-    min-width: 100px; /* Aligns the text after the label */
+  font-weight: 600;
+  display: inline-block;
+  min-width: 100px; /* Aligns the text after the label */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .contact-container {
-        padding: 1.5rem;
-    }
+  .contact-container {
+    padding: 1.5rem;
+  }
 
-    .contact-container h1 {
-        font-size: 2rem;
-    }
+  .contact-container h1 {
+    font-size: 2rem;
+  }
 
-    .contact-section h2 {
-        font-size: 1.25rem;
-    }
+  .contact-section h2 {
+    font-size: 1.25rem;
+  }
 }
+
+/* --- STYLES FOR ADDED FORM --- */
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#contactForm label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-base-300);
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+#contactForm button {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-blue-600);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  align-self: flex-start;
+  transition: background-color 0.2s;
+}
+#contactForm button:hover {
+  background-color: var(--color-blue-700);
+}
+#success-message {
+  display: none; /* Hidden by default */
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--color-green-100);
+  color: var(--color-green-700);
+  border: 1px solid var(--color-green-border);
+  border-radius: 4px;
+  text-align: center;
+}
+

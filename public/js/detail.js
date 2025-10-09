@@ -1,78 +1,357 @@
+// ============================================
+// FUNGSI UTILITAS (Diintegrasikan dari ultility.js)
+// ============================================
+
+/**
+ * Generate ID unik untuk berita berdasarkan link
+ * @param {Object} berita - Data berita
+ * @returns {string} ID unik berita
+ */
+function generateBeritaId(berita) {
+  return berita.link || `${berita.title}-${berita.isoDate}`;
+}
+
+/**
+ * Mengambil semua bookmark dari localStorage
+ * @returns {Array} Array berisi data bookmark
+ */
+function getBookmarks() {
+  try {
+    const bookmarks = localStorage.getItem("bookmarks");
+    return bookmarks ? JSON.parse(bookmarks) : [];
+  } catch (error) {
+    console.error("Error saat membaca bookmark:", error);
+    return [];
+  }
+}
+
+/**
+ * Menambahkan bookmark ke localStorage
+ * @param {Object} bookmarkData - Data bookmark yang akan disimpan
+ * @returns {boolean} True jika berhasil
+ */
+function addBookmark(bookmarkData) {
+  try {
+    const bookmarks = getBookmarks();
+    const exists = bookmarks.some((item) => item.id === bookmarkData.id);
+    if (exists) {
+      return false;
+    }
+    bookmarks.unshift(bookmarkData);
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    return true;
+  } catch (error) {
+    console.error("Error saat menambah bookmark:", error);
+    return false;
+  }
+}
+
+/**
+ * Menghapus bookmark dari localStorage
+ * @param {string} beritaId - ID berita yang akan dihapus
+ * @returns {boolean} True jika berhasil
+ */
+function removeBookmark(beritaId) {
+  try {
+    let bookmarks = getBookmarks();
+    const initialLength = bookmarks.length;
+    bookmarks = bookmarks.filter((item) => item.id !== beritaId);
+    if (bookmarks.length === initialLength) {
+      return false;
+    }
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+    return true;
+  } catch (error) {
+    console.error("Error saat menghapus bookmark:", error);
+    return false;
+  }
+}
+
+/**
+ * Cek apakah berita sudah di-bookmark
+ * @param {string} beritaId - ID berita
+ * @returns {boolean} True jika sudah di-bookmark
+ */
+function isBookmarked(beritaId) {
+  const bookmarks = getBookmarks();
+  return bookmarks.some((item) => item.id === beritaId);
+}
+
+/**
+ * Toggle status bookmark (tambah/hapus)
+ * @param {Object} dataBerita - Data berita lengkap dengan format {berita, slugPenerbit, namaPenerbit}
+ * @returns {Object} {success: boolean, action: 'added'|'removed'}
+ */
+function toggleBookmark(dataBerita) {
+  const beritaId = generateBeritaId(dataBerita.berita);
+  const bookmarked = isBookmarked(beritaId);
+
+  if (bookmarked) {
+    const success = removeBookmark(beritaId);
+    return { success: success, action: "removed" };
+  } else {
+    const bookmarkData = {
+      id: beritaId,
+      berita: dataBerita.berita,
+      slugPenerbit: dataBerita.slugPenerbit,
+      namaPenerbit: dataBerita.namaPenerbit,
+      timestamp: new Date().toISOString(),
+    };
+    const success = addBookmark(bookmarkData);
+    return { success: success, action: "added" };
+  }
+}
+
+/**
+ * Update tampilan button bookmark
+ * @param {jQuery} $btn - Element button
+ * @param {boolean} bookmarked - Status bookmark
+ */
+function updateBookmarkButtonState($btn, bookmarked) {
+  const $icon = $btn.find("i");
+  if (bookmarked) {
+    $btn.addClass("bookmarked").attr('title', 'Hapus Bookmark');
+    $icon.removeClass("bx-bookmark").addClass("bxs-bookmark");
+  } else {
+    $btn.removeClass("bookmarked").attr('title', 'Bookmark');
+    $icon.removeClass("bxs-bookmark").addClass("bx-bookmark");
+  }
+}
+
+/**
+ * Inisialisasi tombol bookmark dengan data berita
+ * @param {jQuery} $btn - Element button bookmark
+ * @param {Object} dataBerita - Data berita lengkap
+ */
+function initBookmarkButton($btn, dataBerita) {
+  $btn.data("berita", dataBerita);
+  const beritaId = generateBeritaId(dataBerita.berita);
+  const bookmarked = isBookmarked(beritaId);
+  updateBookmarkButtonState($btn, bookmarked);
+
+  $btn.off("click").on("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const result = toggleBookmark(dataBerita);
+    updateBookmarkButtonState($(this), result.action === "added");
+  });
+}
+
+/**
+ * Menyimpan detail berita ke localStorage dan redirect ke halaman detail
+ * @param {Object} berita - Data berita lengkap
+ * @param {string} slugPenerbit - Kunci penerbit (opsional)
+ * @param {string} namaPenerbit - Nama penerbit (opsional)
+ */
+function setDetailBerita(berita, slugPenerbit = "", namaPenerbit = "") {
+  try {
+    const detailBerita = {
+      title: berita.title,
+      link: berita.link,
+      image: berita.image,
+      contentSnippet: berita.contentSnippet || "",
+      isoDate: berita.isoDate,
+      slugPenerbit: slugPenerbit,
+      namaPenerbit: namaPenerbit,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem("DetailBerita", JSON.stringify(detailBerita));
+    window.location.href = "/pages/detail.html";
+  } catch (error) {
+    window.open(berita.link, "_blank");
+  }
+}
+
+
+// ============================================
+// LOGIKA UTAMA HALAMAN DETAIL
+// ============================================
+
 $(document).ready(function () {
     const newsContent = $('#news-content');
     const loading = $('#loading');
     const errorMessage = $('#error-message');
-    const relatedNewsGrid = $('#related-news-grid');
-    const relatedTopicsContainer = $('#related-topics-container');
     const relatedNewsContainer = $('#related-news-container');
+    const relatedNewsGrid = $('#related-news-grid');
 
-    // Fungsi untuk memformat tanggal
     function formatDate(isoDate) {
+        if (!isoDate || isNaN(new Date(isoDate))) {
+            return "Tanggal tidak tersedia";
+        }
         const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
         return new Date(isoDate).toLocaleDateString('id-ID', options) + ' WIB';
     }
 
-    // Fungsi untuk menampilkan berita utama
-    function displayMainArticle(article) {
+    function formatCardDate(isoDate) {
+        if (!isoDate || isNaN(new Date(isoDate))) {
+            return "";
+        }
+        const options = { day: 'numeric', month: 'long' };
+        return new Date(isoDate).toLocaleDateString('id-ID', options);
+    }
+
+    /**
+     * Inisialisasi kontrol untuk mengubah ukuran font artikel
+     */
+    function initFontSizeControls() {
+        const $articleContent = $('.article-content');
+        const $fontButtons = $('.font-btn');
+        const FONT_SIZE_KEY = 'newsFontSize';
+
+        function applyFontSize(size) {
+            $articleContent.removeClass('font-sm font-md font-lg');
+            $articleContent.addClass(`font-${size}`);
+            $fontButtons.removeClass('active');
+            $(`#font-${size}`).addClass('active');
+            localStorage.setItem(FONT_SIZE_KEY, size);
+        }
+
+        const savedSize = localStorage.getItem(FONT_SIZE_KEY) || 'md';
+        applyFontSize(savedSize);
+
+        $fontButtons.on('click', function() {
+            const newSize = $(this).attr('id').split('-')[1]; // 'sm', 'md', or 'lg'
+            applyFontSize(newSize);
+        });
+    }
+
+    function displayArticle(article) {
+        const contentToShow = article.fullContent || `<p>${article.contentSnippet}</p>`;
         const articleHTML = `
             <article class="news-article">
-                <h1>${article.title}</h1>
+                <div class="article-header">
+                    <h1>${article.title}</h1>
+                </div>
                 <p class="article-meta">
-                    <span>${formatDate(article.isoDate)}</span>
+                    <span>${formatDate(article.isoDate || new Date())}</span>
                 </p>
+
+                <div class="font-size-controls">
+                    <span>Ukuran Teks:</span>
+                    <button id="font-sm" class="font-btn">A-</button>
+                    <button id="font-md" class="font-btn">A</button>
+                    <button id="font-lg" class="font-btn">A+</button>
+                    <button class="bookmark-btn main-bookmark-btn" title="Bookmark" style="margin-left:auto;">
+                        <i class="bx bx-bookmark"></i>
+                    </button>
+                </div>
+
                 <img src="${article.image.large}" alt="${article.title}" class="article-image" onerror="this.src='https://placehold.co/800x450/EEE/31343C?text=Image+Not+Found';">
                 <div class="article-content">
-                    <p>${article.contentSnippet}</p>
-                    <a href="${article.link}" target="_blank">Baca selengkapnya di sumber asli...</a>
+                    ${contentToShow}
+                    <p><a href="${article.link}" target="_blank">Baca selengkapnya di sumber asli...</a></p>
                 </div>
             </article>
         `;
         newsContent.html(articleHTML);
+
+        const $mainBookmarkBtn = $('.main-bookmark-btn');
+        const mainArticleData = {
+            berita: article,
+            slugPenerbit: article.slugPenerbit || 'cnn-news',
+            namaPenerbit: article.namaPenerbit || 'CNN News'
+        };
+        initBookmarkButton($mainBookmarkBtn, mainArticleData);
+        
+        // Inisialisasi kontrol font size setelah artikel dirender
+        initFontSizeControls();
     }
 
-    // Fungsi untuk menampilkan berita terkait
-    function displayRelatedNews(articles) {
-        relatedNewsGrid.empty(); // Kosongkan grid
-        articles.forEach(article => {
-            const cardHTML = `
-                <a href="${article.link}" target="_blank" class="related-news-card">
-                    <img src="${article.image.small}" class="card-image" alt="${article.title}" onerror="this.src='https://placehold.co/400x225/EEE/31343C?text=Image+Not+Found';">
-                    <div class="card-content">
-                        <h3 class="card-title">${article.title}</h3>
-                    </div>
-                </a>
-            `;
-            relatedNewsGrid.append(cardHTML);
-        });
+    // --- LOGIKA BERITA TERKAIT ---
+    const KATEGORI_TERSEDIA = [
+        "nasional", "teknologi", "olahraga", "ekonomi",
+        "hiburan", "gaya-hidup", "internasional", "otomotif",
+    ];
+
+    function buatUrlApi(slugPenerbit, kategori = "") {
+        const baseUrl = `https://berita-indo-api.vercel.app/v1/${slugPenerbit}`;
+        return kategori ? `${baseUrl}/${kategori}` : baseUrl;
     }
 
-    // Menggunakan endpoint 'terbaru' untuk mendapatkan berita terkini
-    const apiUrl = 'https://berita-indo-api.vercel.app/v1/${penerbitKey}/${category}';
+    function fetchAndDisplayRelatedNews(penerbit = 'cnn-news') {
+        const randomIndex = Math.floor(Math.random() * KATEGORI_TERSEDIA.length);
+        const randomCategory = KATEGORI_TERSEDIA[randomIndex];
+        const apiUrl = buatUrlApi(penerbit, randomCategory);
 
-    $.get(apiUrl)
-        .done(function (response) {
-            if (response.success && response.data.length > 0) {
-                const mainArticle = response.data[0];
-                const relatedArticles = response.data.slice(1, 5); // Ambil 4 berita berikutnya
+        $.get(apiUrl)
+            .done(function (response) {
+                if (response.data && response.data.length > 0) {
+                    relatedNewsGrid.empty();
+                    const newsToShow = response.data.slice(0, 4); 
+                    const publisherName = penerbit.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-                displayMainArticle(mainArticle);
-                displayRelatedNews(relatedArticles);
+                    newsToShow.forEach(function(berita) {
+                        const cardDate = formatCardDate(berita.isoDate);
+                        const dataBerita = { berita: berita, slugPenerbit: penerbit, namaPenerbit: publisherName };
 
-                // Tampilkan semua section setelah data dimuat
-                loading.hide();
-                newsContent.show();
-                relatedTopicsContainer.show();
-                relatedNewsContainer.show();
-            } else {
-                // Jika tidak ada berita
-                loading.hide();
-                errorMessage.text('Tidak ada berita yang ditemukan.').show();
-            }
-        })
-        .fail(function () {
-            // Jika terjadi error pada request
+                        const newsCardHTML = `
+                        <div class="card">
+                            <div class="card-image-wrapper">
+                                <img src="${berita.image.small}" alt="${berita.title}" onerror="this.src='https://placehold.co/400x225/EEE/31343C?text=Image';">
+                            </div>
+                            <div class="card-content">
+                                <p class="card-date">
+                                    ${cardDate} |
+                                    <span class="card-publisher">${publisherName}</span>
+                                </p>
+                                <h2 class="card-title">
+                                    <a href="javascript:void(0)" class="detail-link">${berita.title}</a>
+                                </h2>
+                                <p class="card-description">
+                                    ${berita.contentSnippet}
+                                </p>
+                                <div class="card-actions">
+                                    <a href="javascript:void(0)" class="news-link detail-link">Baca Selengkapnya</a>
+                                    <button class="bookmark-btn" title="Bookmark">
+                                        <i class="bx bx-bookmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                        
+                        const $newsCard = $(newsCardHTML);
+                        
+                        initBookmarkButton($newsCard.find('.bookmark-btn'), dataBerita);
+                        
+                        $newsCard.find('.detail-link').on('click', function(e) {
+                            e.preventDefault();
+                            setDetailBerita(berita, penerbit, publisherName);
+                        });
+
+                        relatedNewsGrid.append($newsCard);
+                    });
+
+                    relatedNewsContainer.show();
+                }
+            })
+            .fail(function() {
+                console.error("Gagal memuat berita terkait dari kategori:", randomCategory);
+                relatedNewsContainer.hide();
+            });
+    }
+
+    // --- LOGIKA UTAMA ---
+    const articleJSON = localStorage.getItem('DetailBerita');
+
+    if (articleJSON) {
+        try {
+            const article = JSON.parse(articleJSON);
+            displayArticle(article);
+
             loading.hide();
-            errorMessage.show();
-        });
+            newsContent.show();
+            
+            fetchAndDisplayRelatedNews(article.slugPenerbit || 'cnn-news');
+
+        } catch (e) {
+            console.error("Gagal mem-parsing data artikel dari localStorage:", e);
+            loading.hide();
+            errorMessage.text('Gagal menampilkan berita karena data tidak valid.').show();
+        }
+    } else {
+        loading.hide();
+        errorMessage.text('Tidak ada berita yang dipilih. Silakan kembali ke halaman utama dan pilih sebuah artikel.').show();
+    }
 });
 
