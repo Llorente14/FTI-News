@@ -22,6 +22,7 @@
   padding: 0 2rem;
   max-width: 1600px;
 }
+
 .navbar-container:nth-child(2) {
   height: 50%;
   display: flex;
@@ -73,11 +74,13 @@
   font-size: 3rem;
   color: var(--color-neutral);
 }
+
 .navbar-container i:hover {
   color: var(--color-accent-content);
 }
 
 /* Styling Buat Dropdown */
+
 .dropdown {
   position: relative;
 }
@@ -215,6 +218,7 @@
 .search-button:hover {
   background-color: var(--color-accent-border);
 }
+
 .search-button:hover i {
   color: var(--color-neutral);
 }
@@ -245,7 +249,6 @@
     backdrop-filter: none;
     background-color: var(--color-base-200);
   }
-
   .navbar-container:nth-child(1) .navbar-menu {
     display: none;
     flex-direction: column;
@@ -260,11 +263,9 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
   }
-
   .navbar-container .navbar-menu.active {
     display: flex;
   }
-
   .navbar-toggle.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
@@ -274,49 +275,39 @@
   .navbar-toggle.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
-
   .navbar-menu .search-container {
     order: -1;
   }
-
   .navbar-toggle {
     display: block;
     z-index: 999;
   }
-
   .navbar-container i {
     display: none;
   }
   .search-container {
     width: 100%;
   }
-
   .search-form {
     border: none;
   }
-
   .search-form:focus-within {
     border: 2px solid var(--color-accent-border);
     box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.1);
   }
-
   .search-input {
     flex-grow: 4;
     max-width: 150px;
   }
-
   .search-button {
     flex-grow: 1;
-
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }
-
   .search-button i {
     font-size: 2rem;
     display: block !important;
   }
-
   .dropdown-content {
     position: static;
     box-shadow: none;
@@ -327,13 +318,11 @@
     border-radius: 8px;
     text-align: start;
   }
-
   .dropdown-menu {
     gap: 1.2rem;
     display: flex;
     flex-direction: column;
   }
-
   .dropdown-menu li a {
     display: block;
     padding: 3px 20px !important;
@@ -344,23 +333,19 @@
     border-radius: 10px !important;
     border: 2px solid transparent !important;
   }
-
   .dropdown-menu li a:nth-child(1) {
     margin-top: 1.2rem;
   }
-
   .dropdown-menu li a:hover {
     color: var(--color-accent-content) !important;
     background: var(--color-accent) !important;
     border-color: var(--color-accent-border) !important;
   }
-
   .dropdown-button i {
     display: block !important;
     font-size: 2rem !important;
     transition: transform 0.3s ease;
   }
-
   .dropdown-button.active i {
     transform: rotate(180deg);
   }
