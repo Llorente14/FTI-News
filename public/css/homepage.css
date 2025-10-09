@@ -268,6 +268,8 @@ img {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .populer-news .wrapper .card-image-wrapper {
@@ -287,10 +289,12 @@ img {
 }
 
 .populer-news .wrapper .card-content {
-  padding: 0.8rem;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
+  flex-grow: 1;
+  gap: 1rem;
+  justify-content: space-between;
 }
 
 .populer-news .wrapper .card-date,
@@ -327,6 +331,27 @@ img {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.populer-news .wrapper .news-link {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-accent-content);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.populer-news .wrapper .news-link:hover {
+  background-color: var(--color-primary);
+  color: var(--color-primary-content);
+  transform: translateX(4px);
 }
 
 /* ================================= */
@@ -419,6 +444,44 @@ img {
   line-height: 1.5;
   color: var(--color-neutral);
   font-family: Georgia, serif;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.bookmark-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.bookmark-btn i {
+  font-size: 20px;
+  color: #000;
+}
+
+/* Style ketika sudah di-bookmark */
+.bookmark-btn.bookmarked {
+  background-color: #fff;
+}
+
+.bookmark-btn.bookmarked i {
+  color: var(--color-warning);
 }
 
 /* ================================= */
@@ -776,5 +839,14 @@ img {
 
   .update-card.featured .update-img-container {
     height: 150px;
+  }
+
+  /* Bookmark Btn */
+  .bookmark-btn {
+    width: 35px;
+    height: 35px;
+  }
+  .bookmark-btn i {
+    font-size: 18px;
   }
 }
