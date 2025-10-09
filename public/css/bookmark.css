@@ -42,13 +42,12 @@
     color: #333;
 }
 
-.featured-news a {
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--color-base-100);
-    border-radius: 8px;
-    background-color: #555;
-    padding: 10px 15px;
+.featured-news .featured-snippet {
+    font-size: 14px;      /* Ukuran font sedikit lebih kecil */
+    color: #666;           /* Warna abu-abu agar tidak terlalu dominan */
+    line-height: 1.6;     /* Jarak antar baris agar mudah dibaca */
+    margin: 15px 0;       /* Beri jarak dari judul dan tombol */
+    text-align: left;     /* Ratakan teks ke kiri */
 }
 
 /* Kolom Daftar Berita (Kanan) */
@@ -58,6 +57,27 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.news-list::-webkit-scrollbar {
+    width: 4px; /* Lebar scrollbar */
+}
+
+.news-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Warna latar belakang track */
+    border-radius: 10px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+    background: #888; /* Warna scrollbar-nya */
+    border-radius: 10px;
+}
+
+.news-list::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Warna saat di-hover */
 }
 
 .news-item {
@@ -82,10 +102,28 @@
     border-radius: 5px;
 }
 
-.news-item p {
+.news-item .news-title {
     margin: 0;
     font-size: 16px;
-    color: #555;
+    font-weight: bold; /* Buat judul sedikit tebal */
+    color: #333; /* Warna lebih gelap untuk judul */
+}
+
+.news-item .news-text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Jarak antara judul dan snippet */
+}
+
+.news-item .news-snippet {
+    margin: 0;
+    font-size: 14px;
+    color: #666; /* Warna lebih terang untuk snippet */
+    
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2   ; /* Jumlah baris maksimal */
+    -webkit-box-orient: vertical;
 }
 
 /* STATE KEDUA: Ketika salah satu berita di list dipilih */
@@ -101,4 +139,80 @@ h1 {
     text-align: center;
     margin: 20px 0;
     color: #333;
+}
+
+.news-item .bookmark-btn {
+    margin-left: auto;
+}
+
+.featured-news .featured-snippet {
+    font-size: 14px;      /* Ukuran font sedikit lebih kecil */
+    color: #666;           /* Warna abu-abu agar tidak terlalu dominan */
+    line-height: 1.6;     /* Jarak antar baris agar mudah dibaca */
+    margin: 15px 0;       /* Beri jarak dari judul dan tombol */
+    text-align: center;     /* Ratakan teks ke kiri */
+    
+}
+
+.featured-news .news-link{
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: auto;
+}
+.featured-news .news-link:hover{
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    transform: translateX(4px);
+}
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 24px; /* Perkecil ukuran judul utama */
+    }
+
+    /* Ubah layout utama dari berdampingan menjadi vertikal (atas-bawah) */
+    .container {
+        flex-direction: column; 
+        padding: 10px;          
+        margin-bottom: 20px;
+    }
+
+    .featured-news {
+        padding: 10px;
+    }
+
+    .featured-news img {
+        width: 80%; 
+    }
+
+    .featured-news h2 {
+        font-size: 20px;
+        margin: 15px 0;
+    }
+
+    /* Sesuaikan item berita di dalam daftar */
+    .news-item {
+        gap: 10px;
+    }
+
+    .news-item p {
+        font-size: 14px; 
+    }
+
+    .bookmark-btn {
+    width: 35px;
+    height: 35px;
+    }
+    .bookmark-btn i {
+        font-size: 18px;
+    }
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/public/css/variables/colorsFont.css" />
     <link rel="stylesheet" href="/public/css/about.css">
     <link rel="stylesheet" href="/public/css/bookmark.css" />
+    <link rel="stylesheet" href="/public/css/homepage.css" />
     <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -91,30 +92,14 @@
         <div class="featured-news">
             <img src="" alt="Gambar Berita Utama">
             <h2></h2>
-            <a href="#">Baca Lebih Lanjut</a>
+            
+            <p class="featured-snippet"></p> 
+            
+            <a href="#" class="news-link">Baca Selengkapnya</a>
         </div>
 
-        <div class="news-list">
-            <div class="news-item">
-                <img src="/public/images/Ekonomi-Kategori.png" alt="Gambar Berita 1">
-                <p>Judul Berita Pertama yang Cukup Panjang</p>
-            </div>
-            <div class="news-item">
-                <img src="/public/images/GayaHidup-Kategori.png" alt="Gambar Berita 2">
-                <p>Ini Adalah Judul Berita Kedua</p>
-            </div>
-            <div class="news-item">
-                <img src="https://via.placeholder.com/600x400.png?text=Gambar+Tiga" alt="Gambar Berita 3">
-                <p>Berita Ketiga Tentang Teknologi Terbaru</p>
-            </div>
-            <div class="news-item">
-                <img src="https://via.placeholder.com/600x400.png?text=Gambar+Empat" alt="Gambar Berita 4">
-                <p>Pembahasan Topik Keempat</p>
-            </div>
-            <div class="news-item">
-                <img src="https://via.placeholder.com/600x400.png?text=Gambar+Lima" alt="Gambar Berita 5">
-                <p>Judul Berita Kelima Sebagai Penutup</p>
-            </div>
+        <div class="news-list" id="newsList">
+            <!-- Daftar berita akan dimuat di sini -->
         </div>
     </div>
 
@@ -172,7 +157,10 @@
         </p>
       </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../public/js/components/header.js"></script>
-    <script src="../public/js/bookmark.js"></script>
+    <!-- <script src="../public/js/bookmark.js"></script> -->
+     <script src="../public/js/bookmark.js" type="module"></script>
+     <script src="../public/js/ultilitas/ultility.js"></script>
 </body>
 </html>

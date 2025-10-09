@@ -32,3 +32,19 @@ body .about h1{
     margin-bottom: 20px;
     color: #333;
 }
+
+#anggota-section img{
+    display: block;
+    margin: auto;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px){
+    #anggota-section img{
+        max-width: 500px;
+        height: auto;
+    }
+    
+}
