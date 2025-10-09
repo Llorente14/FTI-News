@@ -79,9 +79,11 @@ $(document).ready(function () {
            <div class="news-card">
             <div class="news-image">
             <img 
-                src="${artikel.image.small || "/public/images/no-image.jpg"}" 
+                src="${
+                  artikel.image.small || "/public/images/skeleton-news.png"
+                }" 
                 alt="${artikel.title}"
-                onerror="this.src='/public/images/no-image.jpg'"
+                onerror="this.src='/public/images/skeleton-news.png'"
             >
             </div>
             <div class="news-content">

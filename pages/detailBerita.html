@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Detail Page</title>
+    <!-- Boxicons for Icons -->
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="stylesheet"
     />
+    <!-- Component & Page CSS -->
     <link rel="stylesheet" href="../public/css/components/header.css" />
-    <link rel="stylesheet" href="../public/css/components/footer.css" />
-    <link rel="stylesheet" href="../public/css/variables/colorsFont.css" />
-    <link rel="stylesheet" href="../public/css/profile-penerbit.css" />
+    <link rel="stylesheet" href="../public/css/detail.css" />
+    <link rel="stylesheet" href="/public/css/variables/colorsFont.css" />
     <link rel="stylesheet" href="../public/css/components/bookmarkBtn.css" />
-    <title>Penerbit Berita</title>
+    <link rel="stylesheet" href="../public/css/homepage.css" />
+    <link rel="stylesheet" href="../public/css/components/footer.css" />
   </head>
-
   <body>
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
       <div class="navbar-container">
         <a href="/index.html" class="navbar-logo">FTI News</a>
@@ -89,21 +92,34 @@
         </ul>
       </div>
     </nav>
-    <main>
-      <section id="penerbit-info">
-        <div class="penerbit-identitas">
-          <div class="img-container"></div>
-          <h2 id="judul-penerbit"></h2>
-        </div>
-        <div id="data-profil" class="profil-penerbit"></div>
-      </section>
-      <!-- ini artikel yang sudah diterbitkan oleh penerbit, bisa di limit jadi 10 -->
 
-      <section id="artikel-section">
-        <h2 class="artikel-heading">Artikel yang diterbitkan</h2>
-        <div id="artikel-container" class="artikel-grid"></div>
-      </section>
-    </main>
+    <!-- Main Content -->
+    <div class="container">
+      <main class="main-content">
+        <div id="loading" class="loading-spinner"></div>
+        <div id="error-message" class="error-message" style="display: none">
+          Gagal memuat berita. Silakan coba lagi nanti.
+        </div>
+
+        <!-- Container for the single news article -->
+        <div id="news-content" style="display: none">
+          <!-- Article content will be injected here by jQuery -->
+        </div>
+
+        <!-- Related News Section -->
+        <div
+          id="related-news-container"
+          class="related-news-container"
+          style="display: none"
+        >
+          <h2>Berita Terkait Lainnya</h2>
+          <div id="related-news-grid" class="related-news-grid">
+            <!-- Related news cards will be injected here by jQuery -->
+          </div>
+        </div>
+      </main>
+    </div>
+
     <footer class="footer" id="footer">
       <div class="footer-container">
         <div class="footer-col footer-about">
@@ -158,9 +174,10 @@
         </p>
       </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/public/js/profile-penerbit.js" type="module"></script>
-    <script src="/public/js/components/header.js"></script>
-    <script src="/public/js/components/hero-carousel.js"></script>
+    <script src="../public/js/components/header.js"></script>
+    <script src="../public/js/detail.js" type="module"></script>
   </body>
 </html>

@@ -658,6 +658,10 @@ img {
     padding-bottom: 2rem;
   }
 
+  .hero .hero-text p {
+    font-size: 16px;
+  }
+
   .hero .hero-carousel {
     width: 100%;
     display: flex;
@@ -669,6 +673,7 @@ img {
       #000 10% 90%,
       transparent
     );
+    margin: 2rem 0px;
   }
 
   .hero-carousel .prev,
@@ -836,6 +841,9 @@ img {
   /* Hero */
   .hero .hero-carousel {
     margin: 1rem 0 4rem;
+  }
+  .hero .hero-text p {
+    font-size: 1rem;
   }
 
   /* Content */

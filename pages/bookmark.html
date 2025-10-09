@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookmark - FTI News</title>
     <link rel="stylesheet" href="/public/css/components/header.css" />
     <link rel="stylesheet" href="/public/css/components/footer.css" />
     <link rel="stylesheet" href="/public/css/variables/colorsFont.css" />
-    <link rel="stylesheet" href="/public/css/about.css">
+    <link rel="stylesheet" href="/public/css/about.css" />
     <link rel="stylesheet" href="/public/css/bookmark.css" />
     <link rel="stylesheet" href="/public/css/homepage.css" />
-    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet" />
-</head>
-<body>
-    <nav class="navbar hidden" id="navbar">
+    <link
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar" id="navbar">
       <div class="navbar-container">
         <a href="/index.html" class="navbar-logo">FTI News</a>
         <button class="navbar-toggle">
@@ -65,7 +68,7 @@
             </div>
           </li>
 
-          <li><a href="/pages/login.html">Login</a></li>
+          <li id="auth-link"><a href="/login/login.html">Login</a></li>
           <div class="search-container">
             <form class="search-form">
               <input
@@ -80,7 +83,7 @@
             </form>
           </div>
 
-          <a href="/pages/profile.html">
+          <a href="/pages/userprofile.html">
             <i class="bx bx-user-circle"></i>
           </a>
         </ul>
@@ -89,18 +92,18 @@
     <h1>Bookmark</h1>
 
     <div class="container" id="newsContainer">
-        <div class="featured-news">
-            <img src="" alt="Gambar Berita Utama">
-            <h2></h2>
-            
-            <p class="featured-snippet"></p> 
-            
-            <a href="#" class="news-link">Baca Selengkapnya</a>
-        </div>
+      <div class="featured-news">
+        <img src="" alt="Gambar Berita Utama" />
+        <h2></h2>
 
-        <div class="news-list" id="newsList">
-            <!-- Daftar berita akan dimuat di sini -->
-        </div>
+        <p class="featured-snippet"></p>
+
+        <a href="#" class="news-link">Baca Selengkapnya</a>
+      </div>
+
+      <div class="news-list" id="newsList">
+        <!-- Daftar berita akan dimuat di sini -->
+      </div>
     </div>
 
     <footer class="footer hidden" id="footer">
@@ -160,7 +163,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../public/js/components/header.js"></script>
     <!-- <script src="../public/js/bookmark.js"></script> -->
-     <script src="../public/js/bookmark.js" type="module"></script>
-     <script src="../public/js/ultilitas/ultility.js"></script>
-</body>
+    <script src="../public/js/bookmark.js" type="module"></script>
+    <script src="../public/js/ultilitas/ultility.js"></script>
+  </body>
 </html>

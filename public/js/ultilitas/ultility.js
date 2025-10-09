@@ -24,7 +24,7 @@ export function setDetailBerita(berita, slugPenerbit = "", namaPenerbit = "") {
     localStorage.setItem("DetailBerita", JSON.stringify(detailBerita));
 
     // Redirect ke halaman detail (sesuaikan dengan path Anda)
-    window.location.href = "/pages/detail-berita.html";
+    window.location.href = "/pages/detailBerita.html";
   } catch (error) {
     // Fallback: buka link asli jika gagal
     window.open(berita.link, "_blank");

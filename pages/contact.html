@@ -11,21 +11,24 @@
     />
     <!-- Component & Page CSS -->
     <link rel="stylesheet" href="../public/css/components/header.css" />
+    p
     <link rel="stylesheet" href="../public/css/contact.css" />
+    <link rel="stylesheet" href="../public/css/components/footer.css" />
+    <link rel="stylesheet" href="/public/css/variables/colorsFont.css" />
   </head>
   <body>
     <!-- Navbar -->
-        <nav class="navbar">
+    <nav class="navbar" id="navbar">
       <div class="navbar-container">
-        <a href="index.html" class="navbar-logo">FTI News</a>
+        <a href="/index.html" class="navbar-logo">FTI News</a>
         <button class="navbar-toggle">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
         </button>
         <ul class="navbar-menu">
-          <li><a href="#">Beranda</a></li>
-          <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
+          <li><a href="/index.html">Beranda</a></li>
+          <li><a href="/pages/about.html">Tentang Kami</a></li>
           <li class="dropdown">
             <button class="dropdown-button" id="dropdownBtn">
               Kategori
@@ -33,14 +36,41 @@
             </button>
             <div class="dropdown-content" id="dropdownContent">
               <ul class="dropdown-menu">
-                <li><a href="#">Politik</a></li>
-                <li><a href="#">Teknologi</a></li>
-                <li><a href="#">Sport</a></li>
+                <li>
+                  <a href="/pages/category.html?kategori=nasional">Nasional</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=teknologi"
+                    >Teknologi</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=gaya-hidup"
+                    >Gaya Hidup</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=internasional"
+                    >Internasional</a
+                  >
+                </li>
+                <li>
+                  <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
+                </li>
               </ul>
             </div>
           </li>
 
-          <li><a href="/pages/login.html">Login</a></li>
+          <li id="auth-link"><a href="/login/login.html">Login</a></li>
           <div class="search-container">
             <form class="search-form">
               <input
@@ -55,7 +85,7 @@
             </form>
           </div>
 
-          <a href="/pages/profile.html">
+          <a href="/pages/userprofile.html">
             <i class="bx bx-user-circle"></i>
           </a>
         </ul>
@@ -64,25 +94,117 @@
 
     <!-- Main Content -->
     <main class="contact-container">
-        <h1>Contact</h1>
-        
-        <div class="contact-section">
-            <h2>Kontak Redaksi</h2>
-            <p><strong>FTI NEWS</strong></p>
-            <p><strong>Alamat:</strong> Jalan Letjen S. Parman Nomor 1, Grogol Petamburan 11440, Jakarta Barat, DKI Jakarta, Indonesia</p>
-            <p><strong>Email:</strong> redaksi.FTINEWS@untar.ac.id</p>
-            <p><strong>Telepon:</strong> 0812-3456-7890</p>
-        </div>
+      <h1>Contact</h1>
 
-        <div class="contact-section">
-            <h2>Layanan Pengaduan Konsumen</h2>
-            <p><strong>DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</strong></p>
-            <p><strong>Alamat:</strong> Gedung I Lantai 3, Jalan M.I. Ridwan Rais No. 5, Jakarta Pusat 10110</p>
-            <p><strong>Nomor Kontak WhatsApp:</strong> 0809-8765-4321</p>
-        </div>
+      <div class="contact-section">
+        <h2>Kontak Redaksi</h2>
+        <p><strong>FTI NEWS</strong></p>
+        <p>
+          <strong>Alamat:</strong> Jalan Letjen S. Parman Nomor 1, Grogol
+          Petamburan 11440, Jakarta Barat, DKI Jakarta, Indonesia
+        </p>
+        <p><strong>Email:</strong> redaksi.FTINEWS@untar.ac.id</p>
+        <p><strong>Telepon:</strong> 0812-3456-7890</p>
+      </div>
+
+      <div class="contact-section">
+        <h2>Layanan Pengaduan Konsumen</h2>
+        <p>
+          <strong
+            >DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA
+            KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA</strong
+          >
+        </p>
+        <p>
+          <strong>Alamat:</strong> Gedung I Lantai 3, Jalan M.I. Ridwan Rais No.
+          5, Jakarta Pusat 10110
+        </p>
+        <p><strong>Nomor Kontak WhatsApp:</strong> 0809-8765-4321</p>
+      </div>
+
+      <!-- Contact Form Section -->
+      <div class="contact-section">
+        <h2>Kirim Pesan kepada Kami</h2>
+        <form id="contactForm">
+          <div>
+            <label for="name">Nama Anda</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div>
+            <label for="message">Pesan Anda</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <div>
+            <button type="submit">Kirim Pesan</button>
+          </div>
+        </form>
+        <!-- Success Message Notification -->
+        <div id="success-message">Pesan berhasil terkirim!</div>
+      </div>
     </main>
 
+    <footer class="footer" id="footer">
+      <div class="footer-container">
+        <div class="footer-col footer-about">
+          <h3 class="footer-title logo-text">FTI News</h3>
+          <p>
+            Kami berkomitmen untuk menyajikan informasi yang relevan dan
+            terverifikasi, membantu Anda memahami isu-isu penting yang terjadi
+            di sekitar kita dan di seluruh dunia.
+          </p>
+        </div>
+
+        <div class="footer-col footer-links">
+          <h3 class="footer-title">Link Penting</h3>
+          <ul>
+            <li><a href="/pages/bookmark.html">Bookmark</a></li>
+            <li><a href="/pages/about.html">Tentang Kami</a></li>
+            <li><a href="/pages/contact.html">Kontak & FAQ</a></li>
+            <li><a href="/pages/terms.html">Ketentuan Pengguna</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col footer-tags">
+          <h3 class="footer-title">Cari Berdasarkan Kategori</h3>
+          <div class="tag-container">
+            <a href="/pages/category.html?kategori=nasional">Nasional</a>
+            <a href="/pages/category.html?kategori=teknologi">Teknologi</a>
+            <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
+            <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+            <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+            <a href="/pages/category.html?kategori=gaya-hidup">Gaya Hidup</a>
+            <a href="/pages/category.html?kategori=internasional"
+              >Internasional</a
+            >
+            <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
+          </div>
+        </div>
+
+        <div class="footer-col footer-social">
+          <h3 class="footer-title">Media Sosial</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Youtube</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          Copyright &copy; 2025 FTI News by Kelompok 1. All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../public/js/components/header.js"></script>
+    <script src="../public/js/contact.js" type="module"></script>
   </body>
 </html>

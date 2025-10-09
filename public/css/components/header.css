@@ -283,7 +283,7 @@
     z-index: 999;
   }
   .navbar-container i {
-    display: none;
+    margin-left: 14px;
   }
   .search-container {
     width: 100%;
