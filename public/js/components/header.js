@@ -38,10 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const authLi = document.getElementById("auth-link");
 
     if (authLi) {
-        if (userData && userData.email) {
-            // Jika sudah login
+        if (userData && (userData.name || userData.email)) {
+            // ✅ Sekarang selalu tampilkan nama user
+            const displayName = userData.name || userData.email.split('@')[0];
             authLi.innerHTML = `
-        Halo, ${userData.email} | <a href="#" id="logout-btn">Logout</a>
+        Halo, ${displayName} | <a href="#" id="logout-btn">Logout</a>
       `;
             const logoutBtn = document.getElementById("logout-btn");
             if (logoutBtn) {
@@ -54,15 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             // Jika belum login
-            authLi.innerHTML = `<a href="/login/login.html">Login</a>`;
+            authLi.innerHTML = `<a href="/pages/login.html">Login</a>`;
         }
     }
 
     /* Set Link Kategori */
-    /* Set Link Kategori */
     document.querySelectorAll(".dropdown-menu a").forEach((a) => {
         const label = a.textContent.trim().toLowerCase().replace(/\s+/g, '-');
-        a.href = `/pages/category.html?kategori=${encodeURIComponent(label)}`; // FIXED!
+        a.href = `/pages/category.html?kategori=${encodeURIComponent(label)}`;
         a.classList.add("kategori");
         a.setAttribute("data-cat", label);
     });
