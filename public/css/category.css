@@ -304,3 +304,95 @@ img {
         transition: background-color 0.2s;
     }
 }
+
+#news-container .card {
+    background: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#news-container .card-image-wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+
+#news-container .card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
+
+#news-container .card-image-wrapper img:hover {
+    transform: scale(1.1);
+}
+
+#news-container .card-content {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+#news-container .card-date,
+#news-container .card-description {
+    color: #7f7f7f;
+}
+
+#news-container .card-title a {
+    color: black;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#news-container .card-title a:hover {
+    text-decoration: underline;
+}
+
+#news-container .card-publisher {
+    text-decoration: none;
+    color: var(--color-neutral);
+    font-size: 1rem;
+    margin-top: 0.3rem;
+    font-weight: 700;
+}
+
+#news-container .card-publisher:hover {
+    text-decoration: underline;
+}
+
+#news-container .card-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#news-container .news-link {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+#news-container .news-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    transform: translateX(4px);
+}

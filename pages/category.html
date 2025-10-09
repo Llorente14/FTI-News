@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../public/css/components/header.css" />
     <link rel="stylesheet" href="../public/css/components/footer.css" />
     <link rel="stylesheet" href="../public/css/variables/colorsFont.css" />
     <link rel="stylesheet" href="../public/css/category.css" />
+    <link rel="stylesheet" href="/public/css/components/bookmarkBtn.css">
     <title>FTI News</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <nav class="navbar">
-      <div class="navbar-container">
-        <a href="index.html" class="navbar-logo">FTI News</a>
-        <button class="navbar-toggle">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">FTI News</a>
+            <button class="navbar-toggle">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
         </button>
-        <ul class="navbar-menu">
-          <li><a href="/index.html">Beranda</a></li>
-          <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
-          <li class="dropdown">
-            <button class="dropdown-button" id="dropdownBtn">
+            <ul class="navbar-menu">
+                <li><a href="/index.html">Beranda</a></li>
+                <li><a href="/pages/aboutus.html">Tentang Kami</a></li>
+                <li class="dropdown">
+                    <button class="dropdown-button" id="dropdownBtn">
               Kategori
               <i class="bx bx-caret-down"></i>
             </button>
-            <div class="dropdown-content" id="dropdownContent">
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="/pages/category.html?kategori=nasional">Nasional</a>
-                </li>
-                <li>
-                  <a href="/pages/category.html?kategori=teknologi"
-                    >Teknologi</a
+                    <div class="dropdown-content" id="dropdownContent">
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/pages/category.html?kategori=nasional">Nasional</a>
+                            </li>
+                            <li>
+                                <a href="/pages/category.html?kategori=teknologi">Teknologi</a
                   >
                 </li>
                 <li>
                   <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
-                </li>
-                <li>
-                  <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
-                </li>
-                <li>
-                  <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
-                </li>
-                <li>
-                  <a href="/pages/category.html?kategori=gaya-hidup"
-                    >Gaya Hidup</a
+                            </li>
+                            <li>
+                                <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+                            </li>
+                            <li>
+                                <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+                            </li>
+                            <li>
+                                <a href="/pages/category.html?kategori=gaya-hidup">Gaya Hidup</a
                   >
                 </li>
                 <li>
@@ -61,100 +59,93 @@
                 </li>
                 <li>
                   <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
-              </ul>
-            </div>
-          </li>
 
-          <li><a href="/pages/login.html">Login</a></li>
-          <div class="search-container">
-            <form class="search-form">
-              <input
-                type="text"
-                placeholder="Search..."
-                name="search"
-                class="search-input"
-              />
-              <button type="submit" class="search-button">
+                <li><a href="/pages/login.html">Login</a></li>
+                <div class="search-container">
+                    <form class="search-form">
+                        <input type="text" placeholder="Search..." name="search" class="search-input" />
+                        <button type="submit" class="search-button">
                 <i class="bx bx-search"></i>
               </button>
-            </form>
-          </div>
+                    </form>
+                </div>
 
-          <a href="/pages/profile.html">
-            <i class="bx bx-user-circle"></i>
-          </a>
-        </ul>
-      </div>
+                <a href="/pages/profile.html">
+                    <i class="bx bx-user-circle"></i>
+                </a>
+            </ul>
+        </div>
     </nav>
 
     <main class="category-page">
-      <div class="category-header">
-        <h1 id="category-title">Memuat Kategori...</h1>
-      </div>
+        <div class="category-header">
+            <h1 id="category-title">Memuat Kategori...</h1>
+        </div>
 
-      <div id="loading" style="display: none">Memuat berita...</div>
+        <div id="loading" style="display: none">Memuat berita...</div>
 
-      <div id="news-container"></div>
+        <div id="news-container"></div>
 
-      <div id="pagination-container"></div>
+        <div id="pagination-container"></div>
     </main>
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-col footer-about">
-          <h3 class="footer-title logo-text">FTI News</h3>
-          <p>
-            Portal berita terkini seputar teknologi, karir, dan gaya hidup
-            mahasiswa. Selalu sajikan informasi yang relevan, akurat, dan
-            menginspirasi.
-          </p>
-        </div>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <h3 class="footer-title logo-text">FTI News</h3>
+                <p>
+                    Portal berita terkini seputar teknologi, karir, dan gaya hidup mahasiswa. Selalu sajikan informasi yang relevan, akurat, dan menginspirasi.
+                </p>
+            </div>
 
-        <div class="footer-col footer-links">
-          <h3 class="footer-title">Link Penting</h3>
-          <ul>
-            <li><a href="/pages/bookmark.html">Bookmark</a></li>
-            <li><a href="/pages/aboutUs.html">Tentang Kami</a></li>
-            <li><a href="/pages/contact.html">Kontak & FAQ</a></li>
-            <li><a href="/pages/terms.html">Ketentuan Pengguna</a></li>
-          </ul>
-        </div>
+            <div class="footer-col footer-links">
+                <h3 class="footer-title">Link Penting</h3>
+                <ul>
+                    <li><a href="/pages/bookmark.html">Bookmark</a></li>
+                    <li><a href="/pages/aboutUs.html">Tentang Kami</a></li>
+                    <li><a href="/pages/contact.html">Kontak & FAQ</a></li>
+                    <li><a href="/pages/terms.html">Ketentuan Pengguna</a></li>
+                </ul>
+            </div>
 
-        <div class="footer-col footer-tags">
-          <h3 class="footer-title">Cari Berdasarkan Kategori</h3>
-          <div class="tag-container">
-            <a href="/pages/category.html?kategori=nasional">Nasional</a>
-            <a href="/pages/category.html?kategori=teknologi">Teknologi</a>
-            <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
-            <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
-            <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
-            <a href="/pages/category.html?kategori=gaya-hidup">Gaya Hidup</a>
-            <a href="/pages/category.html?kategori=internasional"
-              >Internasional</a
+            <div class="footer-col footer-tags">
+                <h3 class="footer-title">Cari Berdasarkan Kategori</h3>
+                <div class="tag-container">
+                    <a href="/pages/category.html?kategori=nasional">Nasional</a>
+                    <a href="/pages/category.html?kategori=teknologi">Teknologi</a>
+                    <a href="/pages/category.html?kategori=olahraga">Olahraga</a>
+                    <a href="/pages/category.html?kategori=ekonomi">Ekonomi</a>
+                    <a href="/pages/category.html?kategori=hiburan">Hiburan</a>
+                    <a href="/pages/category.html?kategori=gaya-hidup">Gaya Hidup</a>
+                    <a href="/pages/category.html?kategori=internasional">Internasional</a
             >
             <a href="/pages/category.html?kategori=otomotif">Otomotif</a>
-          </div>
+                </div>
+            </div>
+
+            <div class="footer-col footer-social">
+                <h3 class="footer-title">Media Sosial</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Youtube</a></li>
+                </ul>
+            </div>
         </div>
 
-        <div class="footer-col footer-social">
-          <h3 class="footer-title">Media Sosial</h3>
-          <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Youtube</a></li>
-          </ul>
+        <div class="footer-bottom">
+            <p>
+                Copyright &copy; 2025 FTI News by Kelompok 1. All Rights Reserved.
+            </p>
         </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>
-          Copyright &copy; 2025 FTI News by Kelompok 1. All Rights Reserved.
-        </p>
-      </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../public/js/category.js"></script>
+    <script src="../public/js/category.js" type="module"></script>
     <script src="../public/js/components/header.js"></script>
-  </body>
+</body>
+
 </html>
