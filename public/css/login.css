@@ -28,9 +28,6 @@ body {
     }
 }
 
-
-/* Background blur - dikurangi dan ditambah overlay gelap */
-
 .background {
     position: absolute;
     top: 0;
@@ -41,12 +38,8 @@ body {
     background-size: cover;
     z-index: 1;
     filter: blur(4px);
-    /* dikurangi dari 8px ke 4px */
     transform: scale(1.05);
 }
-
-
-/* Overlay gelap untuk mengurangi intensitas background */
 
 .background::after {
     content: '';
@@ -56,19 +49,13 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    /* overlay semi-transparan */
 }
-
-
-/* Floating elements - animasi lebih lambat dan subtle */
 
 .floating-element {
     position: absolute;
     background: rgba(255, 255, 255, 0.05);
-    /* lebih transparan */
     border-radius: 50%;
     animation: float 12s ease-in-out infinite;
-    /* lebih lambat dari 6s ke 12s */
 }
 
 .floating-element:nth-child(1) {
@@ -102,19 +89,14 @@ body {
     }
     50% {
         transform: translateY(-15px) rotate(180deg);
-        /* gerakan lebih halus */
     }
 }
-
-
-/* Glassmorphism login */
 
 .login-container {
     position: relative;
     width: 420px;
     padding: 50px 40px;
     background: rgba(255, 255, 255, 0.12);
-    /* sedikit lebih opaque */
     border-radius: 24px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -122,7 +104,6 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     z-index: 10;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* lebih spesifik */
     animation: slideUp 1s ease-out;
 }
 
@@ -139,7 +120,6 @@ body {
 
 .login-container:hover {
     transform: translateY(-3px);
-    /* dikurangi dari -5px */
     box-shadow: 0 30px 55px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -150,17 +130,14 @@ body {
 
 .login-header h1 {
     color: #ffffff;
-    /* solid white untuk readability */
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 8px;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    /* shadow untuk kontras */
 }
 
 .login-header p {
     color: rgba(255, 255, 255, 0.85);
-    /* lebih opaque */
     font-size: 16px;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
@@ -173,7 +150,6 @@ body {
 .form-group label {
     display: block;
     color: rgba(255, 255, 255, 0.95);
-    /* lebih jelas */
     font-size: 14px;
     margin-bottom: 8px;
     font-weight: 500;
@@ -184,7 +160,6 @@ body {
     width: 100%;
     padding: 16px 20px;
     background: rgba(255, 255, 255, 0.15);
-    /* lebih opaque */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     font-size: 16px;
@@ -195,17 +170,13 @@ body {
 
 .form-group input::placeholder {
     color: rgba(255, 255, 255, 0.6);
-    /* lebih jelas */
 }
 
 .form-group input:focus {
     background: rgba(255, 255, 255, 0.2);
-    /* lebih opaque saat focus */
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-    /* ganti glow effect */
     transform: translateY(-1px);
-    /* dikurangi */
 }
 
 .form-options {
@@ -220,7 +191,6 @@ body {
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
     font-weight: 500;
 }
 
@@ -233,9 +203,9 @@ body {
 
 .forgot-password {
     color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
     text-decoration: none;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .forgot-password:hover {
@@ -259,25 +229,26 @@ body {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.login-btn:hover {
+.login-btn:hover:not(:disabled) {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%);
     transform: translateY(-2px);
-    /* dikurangi dari -3px */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    /* dikurangi */
     border-color: rgba(255, 255, 255, 0.4);
 }
 
 .login-btn:active {
     transform: translateY(0);
-    /* feedback saat klik */
+}
+
+.login-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .register-link {
     text-align: center;
     margin-top: 32px;
     color: rgba(255, 255, 255, 0.85);
-    /* lebih jelas */
     font-size: 14px;
 }
 
@@ -315,19 +286,108 @@ body {
 
 .message.success {
     background: rgba(34, 197, 94, 0.25);
-    /* sedikit lebih opaque */
     border: 1px solid rgba(34, 197, 94, 0.4);
     color: #4ade80;
-    /* warna lebih terang */
 }
 
 .message.error {
     background: rgba(239, 68, 68, 0.25);
-    /* sedikit lebih opaque */
     border: 1px solid rgba(239, 68, 68, 0.4);
     color: #fca5a5;
-    /* warna lebih terang */
 }
+
+
+/* RESET PASSWORD MODAL STYLES */
+
+.reset-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.reset-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    padding: 40px 35px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+.reset-modal-content h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.reset-modal-content p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.reset-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.reset-close:hover {
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+.reset-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(34, 197, 94, 0.2) 100%);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reset-btn:hover {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(34, 197, 94, 0.3) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+
+
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .login-container {
@@ -339,6 +399,13 @@ body {
     }
     .login-header p {
         font-size: 14px;
+    }
+    .reset-modal-content {
+        width: 85%;
+        padding: 35px 25px;
+    }
+    .reset-modal-content h2 {
+        font-size: 24px;
     }
 }
 
@@ -354,5 +421,9 @@ body {
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
+    }
+    .reset-modal-content {
+        width: 90%;
+        padding: 30px 20px;
     }
 }
