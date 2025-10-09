@@ -1,0 +1,62 @@
+/* Using variables defined in header.css */
+body {
+    font-family: monospace;
+    background-color: var(--color-base-100);
+    color: var(--color-base-content);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--color-base-100);
+}
+
+.contact-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-base-content);
+    border-bottom: 2px solid var(--color-base-300);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-section {
+    margin-bottom: 2.5rem;
+}
+
+.contact-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-base-content);
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.contact-section p strong {
+    font-weight: 600;
+    display: inline-block;
+    min-width: 100px; /* Aligns the text after the label */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 1.5rem;
+    }
+
+    .contact-container h1 {
+        font-size: 2rem;
+    }
+
+    .contact-section h2 {
+        font-size: 1.25rem;
+    }
+}
