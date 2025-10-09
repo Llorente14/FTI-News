@@ -5,6 +5,10 @@
   scroll-behavior: smooth;
   font-family: monospace;
 }
+html,
+body {
+  height: 100%;
+}
 
 /* Main Container */
 .container {
