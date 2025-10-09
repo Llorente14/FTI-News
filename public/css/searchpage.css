@@ -1,0 +1,208 @@
+html, body {
+    width: 100%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-base-200);
+}
+
+/* ================================= */
+/* == KONTAINER UTAMA & JUDUL     == */
+/* ================================= */
+.search-page-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 1rem;
+}
+
+.search-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-base-content);
+}
+
+/* ================================= */
+/* == BAR PENCARIAN == */
+/* ================================= */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-base-200);
+    border-radius: 10px;
+    transition: all 0.2s ease, border 0.3s ease-in-out;
+    width: 100%;
+    border: 2px solid var(--color-base-300);
+    margin-bottom: 2rem;
+    overflow: hidden
+}
+
+.search-bar:focus-within {
+    border: 2px solid var(--color-accent-border);
+    box-shadow: 0 0 0 3px oklch(from var(--color-accent) l c h / 0.1);
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--color-base-content);
+    font-size: 1.2rem;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: oklch(from var(--color-base-content) l c h / 0.6);
+}
+
+/* Tombol cari di kanan */
+.search-bar .search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    width: 48px;
+    height: 100%;
+    margin: 0;
+}
+
+.search-bar .search-btn:hover {
+    background-color: var(--color-accent-border);
+}
+
+.search-bar .search-btn:hover i {
+    color: var(--color-neutral);
+}
+
+.search-bar .search-btn i {
+    font-size: 2rem;
+}
+
+/* Sembunyikan tombol clear (×) */
+.search-bar .clear-btn {
+    display: none;
+}
+
+/* ============================================== */
+/* == HASIL PENCARIAN (LAYOUT GRID)            == */
+/* ============================================== */
+.search-results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* ==================================================== */
+/* == OVERRIDE UNTUK INFO PENERBIT & TANGGAL         == */
+/* ==================================================== */
+.search-results .news-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-neutral);
+    margin-bottom: 0.5rem;
+}
+
+.search-results .news-publisher {
+    font-weight: 600;
+    color: var(--color-neutral);
+    text-decoration: none;
+}
+
+.search-results .news-publisher:hover {
+    text-decoration: underline;
+}
+
+.search-results .news-date::after {
+    content: '|';
+    margin-left: 0.5rem;
+    font-weight: normal;
+    color: var(--color-base-300);
+}
+
+/* =========================== */
+/* == PAGINATION & LOADER   == */
+/* =========================== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.pagination-container .page-btn {
+    border: none; 
+    background-color: var(--color-accent);
+    color: var(--color-accent-content); 
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* GAYA HOVER (WARNA TOSKA/PRIMARY) */
+.pagination-container .page-btn:hover:not(.active):not(.disabled) {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+}
+
+/* GAYA TOMBOL AKTIF (BIARKAN WARNA TOSKA) */
+.pagination-container .page-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    cursor: default;
+}
+
+/* GAYA TOMBOL NON-AKTIF */
+.pagination-container .page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-base-300);
+    color: var(--color-neutral);
+}
+
+/* =========================================== */
+/* == TAMPILAN RESPONSIVE (TABLET & MOBILE) == */
+/* =========================================== */
+@media (max-width: 899px) {
+    .search-results {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .news-image {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-results {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .news-image {
+        height: auto !important;
+    }
+}

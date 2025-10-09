@@ -1,5 +1,3 @@
-@import url(/variables/colorsFont.css);
-
 .navbar {
   display: flex;
   flex-direction: column;
@@ -245,6 +243,7 @@
 @media (max-width: 899px) {
   .navbar {
     backdrop-filter: none;
+    background-color: var(--color-base-200);
   }
 
   .navbar-container:nth-child(1) .navbar-menu {
