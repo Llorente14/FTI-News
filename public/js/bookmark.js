@@ -1,7 +1,7 @@
 import { getBookmarks, initBookmarkButton, setDetailBerita, requireAuth } from './ultilitas/ultility.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // requireAuth(); // Pastikan pengguna sudah login
+    requireAuth(); // Pastikan pengguna sudah login
     const newsContainer = document.getElementById('newsContainer');
     const featuredNewsContainer = document.querySelector('.featured-news');
     const featuredImage = featuredNewsContainer.querySelector('img');

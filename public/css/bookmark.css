@@ -43,16 +43,16 @@
 }
 
 .featured-news .featured-snippet {
-    font-size: 14px;      /* Ukuran font sedikit lebih kecil */
-    color: #666;           /* Warna abu-abu agar tidak terlalu dominan */
-    line-height: 1.6;     /* Jarak antar baris agar mudah dibaca */
-    margin: 15px 0;       /* Beri jarak dari judul dan tombol */
-    text-align: left;     /* Ratakan teks ke kiri */
+    font-size: 14px;      
+    color: #666;           
+    line-height: 1.6;     
+    margin: 15px 0;       
+    text-align: left;     
 }
 
 /* Kolom Daftar Berita (Kanan) */
 .news-list {
-    flex: 1; /* Otomatis memenuhi lebar jika featured-news disembunyikan */
+    flex: 1; 
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -63,21 +63,21 @@
 }
 
 .news-list::-webkit-scrollbar {
-    width: 4px; /* Lebar scrollbar */
+    width: 4px; 
 }
 
 .news-list::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Warna latar belakang track */
+    background: #f1f1f1; 
     border-radius: 10px;
 }
 
 .news-list::-webkit-scrollbar-thumb {
-    background: #888; /* Warna scrollbar-nya */
+    background: #888; 
     border-radius: 10px;
 }
 
 .news-list::-webkit-scrollbar-thumb:hover {
-    background: #555; /* Warna saat di-hover */
+    background: #555; 
 }
 
 .news-item {
@@ -105,30 +105,30 @@
 .news-item .news-title {
     margin: 0;
     font-size: 16px;
-    font-weight: bold; /* Buat judul sedikit tebal */
-    color: #333; /* Warna lebih gelap untuk judul */
+    font-weight: bold; 
+    color: #333; 
 }
 
 .news-item .news-text-content {
     display: flex;
     flex-direction: column;
-    gap: 4px; /* Jarak antara judul dan snippet */
+    gap: 4px; 
 }
 
 .news-item .news-snippet {
     margin: 0;
     font-size: 14px;
-    color: #666; /* Warna lebih terang untuk snippet */
+    color: #666; 
     
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2   ; /* Jumlah baris maksimal */
+    -webkit-line-clamp: 2   ; 
     -webkit-box-orient: vertical;
 }
 
 /* STATE KEDUA: Ketika salah satu berita di list dipilih */
 .container.show-featured .featured-news {
-    display: block; /* Tampilkan kembali kolom berita utama */
+    display: block; 
 }
 
 .container.show-featured .news-list {
@@ -146,11 +146,11 @@ h1 {
 }
 
 .featured-news .featured-snippet {
-    font-size: 14px;      /* Ukuran font sedikit lebih kecil */
-    color: #666;           /* Warna abu-abu agar tidak terlalu dominan */
-    line-height: 1.6;     /* Jarak antar baris agar mudah dibaca */
-    margin: 15px 0;       /* Beri jarak dari judul dan tombol */
-    text-align: center;     /* Ratakan teks ke kiri */
+    font-size: 14px;      
+    color: #666;           
+    line-height: 1.6;     
+    margin: 15px 0;       
+    text-align: center;     
     
 }
 
@@ -176,7 +176,7 @@ h1 {
 @media (max-width: 768px) {
 
     h1 {
-        font-size: 24px; /* Perkecil ukuran judul utama */
+        font-size: 24px; 
     }
 
     /* Ubah layout utama dari berdampingan menjadi vertikal (atas-bawah) */
