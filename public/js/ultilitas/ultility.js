@@ -239,3 +239,62 @@ export function loadAllBookmarkStates() {
     }
   });
 }
+
+// ============================================
+// SISTEM AUTENTIKASI
+// ============================================
+/**
+ * Memeriksa apakah user sudah terautentikasi
+ * @returns {boolean} true jika user sudah login, false jika belum
+ */
+export function isAuth() {
+  const userDataFromLocal = localStorage.getItem("userData");
+  const userDataFromSession = sessionStorage.getItem("userData");
+
+  if (!userDataFromLocal && !userDataFromSession) {
+    return false;
+  }
+
+  const activeUserSession = userDataFromLocal || userDataFromSession;
+
+  try {
+    const sessionData = JSON.parse(activeUserSession);
+
+    if (sessionData && sessionData.email) {
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    return false;
+  }
+}
+
+/**
+ * Redirect ke halaman login jika user belum terautentikasi
+ * @param {string} loginUrl - URL halaman login (default: 'login.html')
+ */
+export function requireAuth(loginUrl = "login.html") {
+  if (!isAuth()) {
+    window.location.href = loginUrl;
+  }
+}
+
+/**
+ * Mendapatkan data user yang sedang aktif
+ * @returns {Object|null} Data user atau null jika tidak ada
+ */
+export function getActiveUser() {
+  if (!isAuth()) {
+    return null;
+  }
+
+  const activeUserSession =
+    localStorage.getItem("userData") || sessionStorage.getItem("userData");
+
+  try {
+    return JSON.parse(activeUserSession);
+  } catch (error) {
+    return null;
+  }
+}
