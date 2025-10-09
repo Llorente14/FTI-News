@@ -37,11 +37,11 @@ $(document).ready(function () {
 
     if (searchValue !== "") {
       console.log(searchValue);
-      window.location.href = `/pages/search-page.html?search=${encodeURIComponent(
+      window.location.href = `/pages/search.html?search=${encodeURIComponent(
         searchValue
       )}`;
     } else {
-      window.location.href = "/pages/search-page.html";
+      window.location.href = "/pages/search.html";
     }
   });
 });
