@@ -25,3 +25,23 @@ function toggleDropdown() {
 }
 
 dropdownBtn.addEventListener("click", toggleDropdown);
+
+//Jquery untuk fungsi search-bar
+$(document).ready(function () {
+  searchInput = $(".search-form .search-input");
+
+  $(".search-form").on("submit", (e) => {
+    e.preventDefault();
+
+    searchValue = searchInput.val().trim();
+
+    if (searchValue !== "") {
+      console.log(searchValue);
+      window.location.href = `/pages/search-page.html?search=${encodeURIComponent(
+        searchValue
+      )}`;
+    } else {
+      window.location.href = "/pages/search-page.html";
+    }
+  });
+});
